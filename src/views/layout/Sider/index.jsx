@@ -1,0 +1,30 @@
+import React from 'react'
+import { shallowEqual, useSelector } from 'react-redux'
+import { Layout } from 'antd'
+import Logo from './Logo'
+import Menu from './Menu/index123'
+const { Sider } = Layout
+
+const LayoutSider = () => {
+  const { sidebarLogo, sidebarCollapsed } = useSelector(
+    (state) => ({
+      sidebarLogo: state.settings.get('sidebarLogo'),
+      sidebarCollapsed: state.app.get('sidebarCollapsed'),
+    }),
+    shallowEqual
+  )
+
+  return (
+    <Sider
+      collapsible
+      collapsed={sidebarCollapsed}
+      trigger={null}
+      style={{ zIndex: '10' }}
+    >
+      {sidebarLogo ? <Logo /> : null}
+      <Menu />
+    </Sider>
+  )
+}
+
+export default LayoutSider

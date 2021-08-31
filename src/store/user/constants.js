@@ -1,0 +1,5 @@
+export const CHANGE_RESET_USER = 'user/CHANGE_RESET_USER'
+export const CHANGE_USERNAME = 'user/CHANGE_USERNAME'
+export const CHANGE_TOKEN = 'user/CHANGE_TOKEN'
+export const CHANGE_LOGIN_STATUS = 'user/CHANGE_LOGIN_STATUS'
+export const CHANGE_Roles = 'user/CHANGE_Roles'
