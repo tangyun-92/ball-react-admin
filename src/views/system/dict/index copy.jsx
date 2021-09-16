@@ -2,7 +2,7 @@
  * @Author: 唐云
  * @Date: 2021-08-26 14:32:55
  * @Last Modified by: 唐云
- * @Last Modified time: 2021-08-27 17:32:26
+ * @Last Modified time: 2021-09-16 16:33:52
  * 字典管理
  */
 import React, { Component } from 'react'
@@ -29,7 +29,7 @@ class Dict extends Component {
     dictTypeCode: '',
   }
 
-  componentDidMount() {
+  UNSAFE_componentDidMount() {
     this._isMounted = true
     this.getTableList()
   }
@@ -165,10 +165,7 @@ class Dict extends Component {
         <div className="dict-main">
           <div className="table-container">
             <div className="opera-container">
-              <Button
-                type="primary"
-                onClick={(e) => handleCreate('dictType')}
-              >
+              <Button type="primary" onClick={(e) => handleCreate('dictType')}>
                 新增
               </Button>
             </div>

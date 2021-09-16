@@ -2,7 +2,7 @@ import React from 'react'
 import { shallowEqual, useSelector } from 'react-redux'
 import { Layout } from 'antd'
 import Logo from './Logo'
-import Menu from './Menu/index123'
+import Menu from './Menu/index'
 const { Sider } = Layout
 
 const LayoutSider = () => {

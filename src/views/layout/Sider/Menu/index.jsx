@@ -1,6 +1,6 @@
 import React, { Component, useEffect } from 'react'
 import { Menu, Icon } from 'antd'
-import { Link, withRouter } from 'react-router-dom'
+import { Link, withRouter, useHistory } from 'react-router-dom'
 import { Scrollbars } from 'react-custom-scrollbars'
 import { connect, shallowEqual, useSelector } from 'react-redux'
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd'
@@ -26,21 +26,12 @@ const reorder = (list, startIndex, endIndex) => {
 }
 
 const Meun = (props) => {
-  const {role} = props
-  // state = {
-  //   menuTreeNode: null,
-  //   openKey: [],
-  // };
-  const [menuTreeNode, setMenuTreeNode] = useState(null)
-  // const [openKey, setOpenKey] = useState([])
-  const openKey = []
+  const { role, history } = props
+  const pathname = history.location.pathname
+  const pathArray = pathname.split('/')
+  const openKey = [`/${pathArray[1]}`]
 
-  // const { role } = useSelector(
-  //   (state) => ({
-  //     role: state.user.get('role'),
-  //   }),
-  //   shallowEqual
-  // )
+  const [menuTreeNode, setMenuTreeNode] = useState(null)
 
   // filterMenuItem用来根据配置信息筛选可以显示的菜单项
   const filterMenuItem = useCallback(
@@ -55,55 +46,6 @@ const Meun = (props) => {
       return false
     },
     [role]
-  )
-  // 菜单渲染
-  const getMenuNodes = useCallback(
-    (menuList) => {
-      // 得到当前请求的路由路径
-      const path = props.location.pathname
-      return menuList.reduce((pre, item) => {
-        if (filterMenuItem(item)) {
-          if (!item.children) {
-            pre.push(
-              <Menu.Item key={item.path}>
-                <Link to={item.path}>
-                  {item.icon ? <Icon type={item.icon} /> : null}
-                  <span>{item.title}</span>
-                </Link>
-              </Menu.Item>
-            )
-          } else {
-            // 查找一个与当前请求路径匹配的子Item
-            const cItem = item.children.find(
-              (cItem) => path.indexOf(cItem.path) === 0
-            )
-            // 如果存在, 说明当前item的子列表需要打开
-            if (cItem) {
-              // setOpenKey([...openKey, item.path])
-              openKey.push([...openKey, item.path])
-            }
-
-            // 向pre添加<SubMenu>
-            pre.push(
-              <SubMenu
-                key={item.path}
-                title={
-                  <span>
-                    {item.icon ? <Icon type={item.icon} /> : null}
-                    <span>{item.title}</span>
-                  </span>
-                }
-              >
-                {getMenuNodes(item.children)}
-              </SubMenu>
-            )
-          }
-        }
-
-        return pre
-      }, [])
-    },
-    [filterMenuItem, openKey, props.location.pathname]
   )
 
   const onDragEnd = (result) => {
@@ -124,10 +66,41 @@ const Meun = (props) => {
   }, [])
 
   useEffect(() => {
-    // const menuTreeNode = getMenuNodes(menuList)
-    // setMenuTreeNode(menuTreeNode)
-    handleMenuSelect(openKey)
-  }, [getMenuNodes, handleMenuSelect, openKey])
+    // 菜单渲染
+    const getMenuNodes = (menuList) => {
+      return menuList.reduce((pre, item) => {
+        if (filterMenuItem(item)) {
+          if (!item.children) {
+            pre.push(
+              <Menu.Item key={item.path}>
+                <Link to={item.path}>
+                  {item.icon ? <Icon type={item.icon} /> : null}
+                  <span>{item.title}</span>
+                </Link>
+              </Menu.Item>
+            )
+          } else {
+            // 向pre添加<SubMenu>
+            pre.push(
+              <SubMenu
+                key={item.path}
+                title={
+                  <span>
+                    {item.icon ? <Icon type={item.icon} /> : null}
+                    <span>{item.title}</span>
+                  </span>
+                }
+              >
+                {getMenuNodes(item.children)}
+              </SubMenu>
+            )
+          }
+        }
+        return pre
+      }, [])
+    }
+    setMenuTreeNode(getMenuNodes(menuList))
+  }, [filterMenuItem, props.location.pathname])
 
   const path = props.location.pathname
 

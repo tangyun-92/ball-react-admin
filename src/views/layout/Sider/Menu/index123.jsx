@@ -29,7 +29,7 @@ class Meun extends Component {
     menuTreeNode: null,
     openKey: [],
   }
-  
+
   // filterMenuItem用来根据配置信息筛选可以显示的菜单项
   filterMenuItem = (item) => {
     const { roles } = item
@@ -109,7 +109,7 @@ class Meun extends Component {
     addTag(menuItem)
   }
 
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     const menuTreeNode = this.getMenuNodes(menuList)
     this.setState({
       menuTreeNode,
@@ -117,9 +117,9 @@ class Meun extends Component {
     this.handleMenuSelect(this.state.openKey)
   }
   render() {
-    console.log(this.props)
     const path = this.props.location.pathname
     const openKey = this.state.openKey
+    console.log(this.state.openKey)
 
     return (
       <div className="sidebar-menu-container">

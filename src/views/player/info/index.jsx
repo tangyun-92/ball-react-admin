@@ -2,7 +2,7 @@
  * @Author: 唐云
  * @Date: 2021-08-26 14:32:55
  * @Last Modified by: 唐云
- * @Last Modified time: 2021-08-31 15:03:30
+ * @Last Modified time: 2021-09-16 16:33:48
  * 球员信息
  */
 import React, { Component } from 'react'
@@ -38,7 +38,7 @@ class PlayerInfo extends Component {
     nationList: [],
   }
 
-  componentDidMount() {
+  UNSAFE_componentDidMount() {
     this._isMounted = true
     this.props.getTableList(getPlayer, this.state.searchData)
     this.getTeamList()

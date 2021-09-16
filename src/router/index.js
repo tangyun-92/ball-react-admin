@@ -18,7 +18,6 @@ function Router(props) {
   //   }),
   //   shallowEqual
   // )
-  console.log(props)
   const { token, role } = props
 
   return (
@@ -32,7 +31,6 @@ function Router(props) {
               return <Redirect to="/login" />
             } else {
               if (role) {
-                console.log('123')
                 return <Layout />
               } else {
                 // getUserInfo(token).then(() => <Layout />);
