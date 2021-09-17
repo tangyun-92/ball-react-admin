@@ -9734,15 +9734,14 @@ react-document-title@^2.0.3:
     prop-types "^15.5.6"
     react-side-effect "^1.0.2"
 
-react-dom@^16.13.1:
-  version "16.14.0"
-  resolved "https://registry.nlark.com/react-dom/download/react-dom-16.14.0.tgz?cache=0&sync_timestamp=1629908789034&other_urls=https%3A%2F%2Fregistry.nlark.com%2Freact-dom%2Fdownload%2Freact-dom-16.14.0.tgz#7ad838ec29a777fb3c75c3a190f661cf92ab8b89"
-  integrity sha1-etg47Cmnd/s8dcOhkPZhz5Kri4k=
+react-dom@^17.0.2:
+  version "17.0.2"
+  resolved "https://registry.nlark.com/react-dom/download/react-dom-17.0.2.tgz?cache=0&sync_timestamp=1631809024148&other_urls=https%3A%2F%2Fregistry.nlark.com%2Freact-dom%2Fdownload%2Freact-dom-17.0.2.tgz#ecffb6845e3ad8dbfcdc498f0d0a939736502c23"
+  integrity sha1-7P+2hF462Nv83EmPDQqTlzZQLCM=
   dependencies:
     loose-envify "^1.1.0"
     object-assign "^4.1.1"
-    prop-types "^15.6.2"
-    scheduler "^0.19.1"
+    scheduler "^0.20.2"
 
 react-draft-wysiwyg@^1.14.5:
   version "1.14.7"
@@ -9895,14 +9894,13 @@ react-transition-group@^4.4.1:
     loose-envify "^1.4.0"
     prop-types "^15.6.2"
 
-react@^16.13.1:
-  version "16.14.0"
-  resolved "https://registry.nlark.com/react/download/react-16.14.0.tgz?cache=0&sync_timestamp=1629908790194&other_urls=https%3A%2F%2Fregistry.nlark.com%2Freact%2Fdownload%2Freact-16.14.0.tgz#94d776ddd0aaa37da3eda8fc5b6b18a4c9a3114d"
-  integrity sha1-lNd23dCqo32j7aj8W2sYpMmjEU0=
+react@^17.0.2:
+  version "17.0.2"
+  resolved "https://registry.nlark.com/react/download/react-17.0.2.tgz#d0b5cc516d29eb3eee383f75b62864cfb6800037"
+  integrity sha1-0LXMUW0p6z7uOD91tihkz7aAADc=
   dependencies:
     loose-envify "^1.1.0"
     object-assign "^4.1.1"
-    prop-types "^15.6.2"
 
 read-pkg-up@^2.0.0:
   version "2.0.0"
@@ -10426,10 +10424,10 @@ saxes@^3.1.9:
   dependencies:
     xmlchars "^2.1.1"
 
-scheduler@^0.19.1:
-  version "0.19.1"
-  resolved "https://registry.nlark.com/scheduler/download/scheduler-0.19.1.tgz#4f3e2ed2c1a7d65681f4c854fa8c5a1ccb40f196"
-  integrity sha1-Tz4u0sGn1laB9MhU+oxaHMtA8ZY=
+scheduler@^0.20.2:
+  version "0.20.2"
+  resolved "https://registry.nlark.com/scheduler/download/scheduler-0.20.2.tgz#4baee39436e34aa93b4874bddcbf0fe8b8b50e91"
+  integrity sha1-S67jlDbjSqk7SHS93L8P6Li1DpE=
   dependencies:
     loose-envify "^1.1.0"
     object-assign "^4.1.1"
