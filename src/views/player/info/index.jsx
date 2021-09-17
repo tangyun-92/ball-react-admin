@@ -2,7 +2,7 @@
  * @Author: 唐云
  * @Date: 2021-08-26 14:32:55
  * @Last Modified by: 唐云
- * @Last Modified time: 2021-09-17 15:49:43
+ * @Last Modified time: 2021-09-17 16:22:50
  * 球员信息
  */
 import React, { useState, useEffect, memo } from 'react'
@@ -80,6 +80,7 @@ const PlayerInfo = () => {
    */
   const handleOk = (form) => {
     form.validateFields().then((values) => {
+      console.log(values)
       const data = {
         ...values,
         birthday: values.birthday ? values.birthday.format('YYYY-MM-DD') : '',
@@ -88,8 +89,7 @@ const PlayerInfo = () => {
           : '',
         strong_point: values.strong_point || [],
         weak_point: values.weak_point || [],
-        technical_feature: values.technical_feature || [],
-        avatar: values.avatar ? values.avatar.file.response.url : ''
+        technical_feature: values.technical_feature || []
       }
       const formData = dataHooks.formData
       if (formData.id) {

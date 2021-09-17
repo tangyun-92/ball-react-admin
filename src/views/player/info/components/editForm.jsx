@@ -2,7 +2,7 @@
  * @Author: 唐云
  * @Date: 2021-08-27 17:07:35
  * @Last Modified by: 唐云
- * @Last Modified time: 2021-09-17 16:07:38
+ * @Last Modified time: 2021-09-17 16:29:55
  * 球员信息 - 新增/编辑
  */
 import React, { memo, useEffect, useState } from 'react'
@@ -95,6 +95,7 @@ const EditForm = (props) => {
         setUploadLoading(false)
         setImageUrl(imgUrl)
       })
+      formData.avatar = info.file.response.url
     }
   }
 
@@ -349,12 +350,12 @@ const EditForm = (props) => {
           </Col>
         </Row>
         <Row>
-          <Form.Item
+          {/* <Form.Item
             label="头像:"
             name="avatar"
             // valuePropName="fileList"
             // getValueFromEvent={normFile}
-          >
+          > */}
             <Upload
               name="file"
               listType="picture-card"
@@ -374,7 +375,7 @@ const EditForm = (props) => {
                 </div>
               )}
             </Upload>
-          </Form.Item>
+          {/* </Form.Item> */}
         </Row>
       </Form>
     </Modal>
