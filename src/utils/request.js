@@ -1,7 +1,7 @@
 import axios from 'axios'
 import store from '@/store'
 import { Modal, message } from 'antd'
-import { logout } from '@/store/actions'
+// import { logout } from '@/store/actions'
 
 //创建一个axios示例
 const service = axios.create({
@@ -49,8 +49,8 @@ service.interceptors.response.use(
     console.log(error) // for debug
     const { status, data } = error.response
     if (status && status === 401) {
-      let token = store.getState().user.token
-      store.dispatch(logout(token))
+      // let token = store.getState().user.token
+      // store.dispatch(logout(token))
       message.error('token已过期，请重新登录')
       return Promise.reject(error)
     }
@@ -62,8 +62,8 @@ service.interceptors.response.use(
         okText: '重新登录',
         cancelText: '取消',
         onOk() {
-          let token = store.getState().user.token
-          store.dispatch(logout(token))
+          // let token = store.getState().user.token
+          // store.dispatch(logout(token))
         },
         onCancel() {
           console.log('Cancel')

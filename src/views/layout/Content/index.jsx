@@ -6,7 +6,6 @@ import { Layout } from 'antd'
 import { getMenuItemInMenuListByProperty } from '@/utils'
 import routeList from '@/config/routeMap'
 import menuList from '@/config/menuConfig'
-import { shallowEqual, useSelector } from 'react-redux'
 
 const { Content } = Layout
 

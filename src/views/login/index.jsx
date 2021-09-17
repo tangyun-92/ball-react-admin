@@ -1,10 +1,9 @@
 import React, { memo, useState } from 'react'
 import { Redirect } from 'react-router-dom'
-import { Form, Icon, Input, Button, message, Spin } from 'antd'
-import { connect, shallowEqual, useDispatch, useSelector } from 'react-redux'
+import { Form, Icon, Input, Button, Spin } from 'antd'
+import { connect, useDispatch } from 'react-redux'
 import DocumentTitle from 'react-document-title'
 import './index.less'
-import { login } from '@/store/actions'
 import { getLoginAction } from '@/store/user/actionCreators'
 
 const mapStateToProps = (state) => ({

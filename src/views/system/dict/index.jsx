@@ -2,7 +2,7 @@
  * @Author: 唐云
  * @Date: 2021-08-26 14:32:55
  * @Last Modified by: 唐云
- * @Last Modified time: 2021-09-16 17:10:01
+ * @Last Modified time: 2021-09-17 10:53:46
  * 字典管理
  */
 import React, { memo, useEffect, useState } from 'react'
@@ -87,9 +87,7 @@ const Dict = (props) => {
    * 新增/编辑提交
    */
   const handleOk = (form) => {
-    form
-      .validateFields()
-      .then((values) => {
+    form.validateFields().then((values) => {
         const formData = dataHooks.formData // 点击行数据
         const createType = dataHooks.dictCreateType // 新增类型
         console.log(createType)

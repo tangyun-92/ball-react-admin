@@ -1,6 +1,6 @@
 import React, { memo } from 'react'
 import { HashRouter, Route, Switch, Redirect } from 'react-router-dom'
-import { connect, shallowEqual, useSelector } from 'react-redux'
+import { connect } from 'react-redux'
 // import { getUserInfo } from "@/store/actions";
 import Layout from '@/views/layout'
 import Login from '@/views/login'

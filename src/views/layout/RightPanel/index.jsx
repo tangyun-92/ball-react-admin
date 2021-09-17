@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { shallowEqual, useSelector } from 'react-redux'
 import { Drawer, Switch, Row, Col, Divider } from 'antd'
 import { changeSetting } from '@/store/settings/actionCreators'

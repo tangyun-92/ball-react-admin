@@ -2,7 +2,7 @@ import React from 'react'
 import { connect, shallowEqual, useSelector } from 'react-redux'
 import { Icon, Menu, Dropdown, Modal, Layout, Avatar } from 'antd'
 import { Link } from 'react-router-dom'
-import { logout } from '@/store/actions'
+// import { logout } from '@/store/actions'
 import FullScreen from '@/components/FullScreen'
 import Settings from '@/components/Settings'
 import Hamburger from '@/components/Hamburger'
@@ -35,7 +35,7 @@ const LayoutHeader = (props) => {
       okText: '确定',
       cancelText: '取消',
       onOk: () => {
-        logout(token)
+        // logout(token)
       },
     })
   }

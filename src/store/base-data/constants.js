@@ -1,0 +1,1 @@
+export const CHANGE_DICT_LIST = 'baseData/CHANGE_DICT_LIST'

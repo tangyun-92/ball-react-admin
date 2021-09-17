@@ -113,20 +113,6 @@ export default function ({ getListApi, searchData }) {
           message.info('取消操作')
         },
       })
-
-      // Modal.confirm(`是否对选中数据执行${operation}操作`, '提示', {
-      //   confirmButtonText: '确定',
-      //   cancelButtonText: '取消',
-      //   type: 'warning',
-      // })
-      //   .then(async () => {
-      //     await reqFn(data)
-      //     message.success(`${operation}成功`)
-      //     ;(success && success()) || getTableList(data.currentPage)
-      //   })
-      //   .catch(() => {
-      //     message.info(`已取消${operation}`)
-      //   })
     }
   }
 
