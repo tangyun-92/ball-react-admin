@@ -52,7 +52,7 @@ export default function ({ getListApi, searchData }) {
     setFormDialogVisible(true)
     setDialogStatus('create')
     setDialogTitle('新增')
-    setFormData(defaultFormData)
+    setFormData({id: null})
   }
 
   // 编辑
