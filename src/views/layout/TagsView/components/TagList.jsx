@@ -95,9 +95,6 @@ const TagList = (props) => {
   useEffect(() => {
     document.body.addEventListener('click', handleClickOutside)
   }, [handleClickOutside])
-  // const componentWillUnmount() {
-  //   document.body.removeEventListener('click', this.handleClickOutside)
-  // }
 
   const handleCloseAllTags = () => {
     emptyTaglist()
