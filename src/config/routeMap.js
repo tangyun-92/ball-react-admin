@@ -1,19 +1,19 @@
 import Loadable from 'react-loadable'
 import Loading from '@/components/Loading'
 const Dashboard = Loadable({
-  loader: () => import(/*webpackChunkName:'Dashboard'*/ '@/views/dashboard'),
+  loader: () => import('@/views/dashboard'),
   loading: Loading,
 })
 const Dict = Loadable({
-  loader: () => import(/*webpackChunkName:'Dashboard'*/ '@/views/system/dict'),
+  loader: () => import('@/views/system/dict'),
   loading: Loading,
 })
 const PlayerInfo = Loadable({
-  loader: () => import(/*webpackChunkName:'Dashboard'*/ '@/views/player/info'),
+  loader: () => import('@/views/player/info'),
   loading: Loading,
 })
 const Error404 = Loadable({
-  loader: () => import(/*webpackChunkName:'Error404'*/ '@/views/error/404'),
+  loader: () => import('@/views/error/404'),
   loading: Loading,
 })
 
