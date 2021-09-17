@@ -2,7 +2,7 @@
  * @Author: 唐云
  * @Date: 2021-08-26 14:32:55
  * @Last Modified by: 唐云
- * @Last Modified time: 2021-09-17 13:49:32
+ * @Last Modified time: 2021-09-17 13:54:09
  * 球员信息
  */
 import React, { useState, useEffect, memo } from 'react'
@@ -55,7 +55,6 @@ const PlayerInfo = () => {
     multipleSelectionHandler,
   } = useSystemDataHooks({
     getListApi: getPlayer,
-    searchData: '',
   })
 
   /**

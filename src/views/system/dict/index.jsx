@@ -2,7 +2,7 @@
  * @Author: 唐云
  * @Date: 2021-08-26 14:32:55
  * @Last Modified by: 唐云
- * @Last Modified time: 2021-09-17 10:53:46
+ * @Last Modified time: 2021-09-17 13:55:19
  * 字典管理
  */
 import React, { memo, useEffect, useState } from 'react'
@@ -17,16 +17,6 @@ import { getTableListAction } from '@/store/common/actionCreators'
 const { Column } = Table
 
 const Dict = (props) => {
-  // 表单默认值
-  const defaultFormData = {
-    id: null,
-    if_parent: '',
-    parent_code: '',
-    name: '',
-    code: '',
-    remark: '',
-    sort: '',
-  }
   /**
    * state and props
    */
@@ -79,8 +69,6 @@ const Dict = (props) => {
     multipleSelectionHandler,
   } = useSystemDataHooks({
     getListApi: getDict,
-    searchData: '',
-    defaultFormData,
   })
 
   /**
@@ -157,7 +145,7 @@ const Dict = (props) => {
           <div className="opera-container">
             <Button
               type="primary"
-              onClick={(e) => handleCreate(defaultFormData, 'dictType')}
+              onClick={(e) => handleCreate('dictType')}
             >
               新增
             </Button>
@@ -230,7 +218,7 @@ const Dict = (props) => {
           <div className="opera-container">
             <Button
               type="primary"
-              onClick={(e) => handleCreate(defaultFormData, 'dictNature')}
+              onClick={(e) => handleCreate('dictNature')}
               disabled={dictTypeCode ? false : true}
             >
               新增

@@ -1,7 +1,10 @@
+import React from 'react'
 import axios from 'axios'
 import store from '@/store'
-import { Modal, message } from 'antd'
-// import { logout } from '@/store/actions'
+import { message } from 'antd'
+import { Route } from 'react-router-dom'
+import Login from '@/views/login'
+import { changeTokenAction } from '@/store/user/actionCreators'
 
 //创建一个axios示例
 const service = axios.create({
@@ -46,30 +49,11 @@ service.interceptors.response.use(
     }
   },
   (error) => {
-    console.log(error) // for debug
     const { status, data } = error.response
     if (status && status === 401) {
-      // let token = store.getState().user.token
-      // store.dispatch(logout(token))
       message.error('token已过期，请重新登录')
-      return Promise.reject(error)
-    }
-    if (status === 403) {
-      Modal.confirm({
-        title: '确定登出?',
-        content:
-          '由于长时间未操作，您已被登出，可以取消继续留在该页面，或者重新登录',
-        okText: '重新登录',
-        cancelText: '取消',
-        onOk() {
-          // let token = store.getState().user.token
-          // store.dispatch(logout(token))
-        },
-        onCancel() {
-          console.log('Cancel')
-        },
-      })
-      return Promise.reject(error)
+      store.dispatch(changeTokenAction(''))
+      return <Route path="/login" component={Login} />
     }
     message.error(data.message)
     return Promise.reject(error)

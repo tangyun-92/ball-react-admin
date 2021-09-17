@@ -1,13 +1,15 @@
 import React from 'react'
-import { connect, shallowEqual, useSelector } from 'react-redux'
-import { Icon, Menu, Dropdown, Modal, Layout, Avatar } from 'antd'
+import { connect, shallowEqual, useSelector, useDispatch } from 'react-redux'
+import { Icon, Menu, Dropdown, Modal, Layout, Avatar, message } from 'antd'
 import { Link } from 'react-router-dom'
 // import { logout } from '@/store/actions'
 import FullScreen from '@/components/FullScreen'
 import Settings from '@/components/Settings'
 import Hamburger from '@/components/Hamburger'
 import BreadCrumb from '@/components/BreadCrumb'
+import { changeTokenAction } from '@/store/user/actionCreators'
 import './index.less'
+
 const { Header } = Layout
 
 const mapStateToProps = (state) => ({
@@ -27,6 +29,7 @@ const LayoutHeader = (props) => {
     shallowEqual
   )
   const { token, avatar } = props
+  const dispatch = useDispatch()
 
   const handleLogout = (token) => {
     Modal.confirm({
@@ -35,7 +38,8 @@ const LayoutHeader = (props) => {
       okText: '确定',
       cancelText: '取消',
       onOk: () => {
-        // logout(token)
+        dispatch(changeTokenAction(''))
+        message.success('退出成功')
       },
     })
   }

@@ -12,7 +12,9 @@ export const changeDictList = (data) => ({
 export const getDictListAction = () => {
   return (dispatch) => {
     getDict().then((res) => {
-      dispatch(changeDictList(res.data.records))
+      if (res.result) {
+        dispatch(changeDictList(res.data.records))
+      }
     })
   }
 }

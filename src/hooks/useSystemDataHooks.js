@@ -47,7 +47,7 @@ export default function ({ getListApi, searchData }) {
   }
 
   // 新增
-  const handleCreate = (defaultFormData, type) => {
+  const handleCreate = (type, defaultFormData) => {
     setDictCreateType(type)
     setFormDialogVisible(true)
     setDialogStatus('create')
