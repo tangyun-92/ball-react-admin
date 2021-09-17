@@ -2,21 +2,21 @@
  * @Author: 唐云
  * @Date: 2021-08-26 14:32:55
  * @Last Modified by: 唐云
- * @Last Modified time: 2021-08-31 15:03:13
+ * @Last Modified time: 2021-09-16 17:10:01
  * 字典管理
  */
 import React, { memo, useEffect, useState } from 'react'
-import { Table, Button, Divider, message, Modal, Space } from 'antd'
+import { Table, Button, Divider, message } from 'antd'
 import EditForm from './components/editForm'
 import './index.less'
 import { getDict, createOrEditDict, delDict } from '@/api/system/dict'
 import useSystemDataHooks from '@/hooks/useSystemDataHooks'
-import { shallowEqual, useDispatch, useSelector } from 'react-redux'
+import { useDispatch, useSelector, shallowEqual } from 'react-redux'
 import { getTableListAction } from '@/store/common/actionCreators'
 
 const { Column } = Table
 
-export default memo(function Dict() {
+const Dict = (props) => {
   // 表单默认值
   const defaultFormData = {
     id: null,
@@ -37,33 +37,6 @@ export default memo(function Dict() {
   const [selectedRowKeys, setSelectedRowKeys] = useState([])
   // 字典类型的码表代码
   const [dictTypeCode, setDictTypeCode] = useState('')
-
-  // table
-  const columns = [
-    {
-      title: '字典类型',
-      dataIndex: 'name',
-    },
-    {
-      title: '类型代码',
-      dataIndex: 'code',
-    },
-    {
-      title: '备注',
-      dataIndex: 'remark',
-    },
-    {
-      title: '操作',
-      dataIndex: '',
-      render: (text, record) => (
-        <Space size="middle">
-          <a href="#/" onClick={(e) => handleEdit(record)}>
-            编辑
-          </a>
-        </Space>
-      ),
-    },
-  ]
 
   const { tableData, tableLoading } = useSelector(
     (state) => ({
@@ -87,6 +60,7 @@ export default memo(function Dict() {
     setDictNatureData([])
     // 将tableData赋值给字典类型列表
     setDictTypeData(tableData)
+
     // 将字典类型下对应的children赋值给字典属性列表
     dictTypeCode &&
       dictTypeData.forEach((item) => {
@@ -327,4 +301,6 @@ export default memo(function Dict() {
       />
     </div>
   )
-})
+}
+
+export default (memo(Dict))

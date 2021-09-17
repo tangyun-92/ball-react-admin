@@ -2,7 +2,7 @@
  * @Author: 唐云
  * @Date: 2021-08-26 14:32:55
  * @Last Modified by: 唐云
- * @Last Modified time: 2021-09-16 16:33:48
+ * @Last Modified time: 2021-09-16 17:11:36
  * 球员信息
  */
 import React, { Component } from 'react'

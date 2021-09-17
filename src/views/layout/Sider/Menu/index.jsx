@@ -1,8 +1,8 @@
-import React, { Component, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { Menu, Icon } from 'antd'
-import { Link, withRouter, useHistory } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 import { Scrollbars } from 'react-custom-scrollbars'
-import { connect, shallowEqual, useSelector } from 'react-redux'
+import { connect } from 'react-redux'
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd'
 import { addTag } from '@/store/tagsView/actionCreators'
 import { getMenuItemInMenuListByProperty } from '@/utils'
@@ -26,9 +26,9 @@ const reorder = (list, startIndex, endIndex) => {
 }
 
 const Meun = (props) => {
-  const { role, history } = props
-  const pathname = history.location.pathname
-  const pathArray = pathname.split('/')
+  const { role, location } = props
+  const path = location.pathname
+  const pathArray = path.split('/')
   const openKey = [`/${pathArray[1]}`]
 
   const [menuTreeNode, setMenuTreeNode] = useState(null)
@@ -101,8 +101,6 @@ const Meun = (props) => {
     }
     setMenuTreeNode(getMenuNodes(menuList))
   }, [filterMenuItem, props.location.pathname])
-
-  const path = props.location.pathname
 
   return (
     <div className="sidebar-menu-container">
