@@ -2,20 +2,16 @@
  * @Author: 唐云
  * @Date: 2021-08-27 17:07:35
  * @Last Modified by: 唐云
- * @Last Modified time: 2021-09-18 10:36:31
+ * @Last Modified time: 2021-09-18 14:29:18
  * 球员信息 - 新增/编辑
  */
-import React, { memo, useEffect, useState } from 'react'
-import { Col, DatePicker, Form, Input, Modal, Row, Select, Upload } from 'antd'
+import React, { memo, useEffect } from 'react'
+import { Col, DatePicker, Form, Input, Modal, Row, Select } from 'antd'
 import { filterDict } from '@/utils'
 import moment from 'moment'
-import { LoadingOutlined, PlusOutlined } from '@ant-design/icons'
-import { shallowEqual, useSelector } from 'react-redux'
+import UploadImg from '@/components/UploadImg'
 
 const EditForm = (props) => {
-  const [uploadLoading, setUploadLoading] = useState(false)
-  const [imageUrl, setImageUrl] = useState('')
-  const baseUrl = process.env.REACT_APP_BASE_API
   const { visible, onCancel, onOk, formData, teamList, nationList } = props
   const {
     id,
@@ -49,15 +45,7 @@ const EditForm = (props) => {
     },
   }
 
-  const { token } = useSelector(
-    (state) => ({
-      token: state.user.token,
-    }),
-    shallowEqual
-  )
-
   useEffect(() => {
-    setImageUrl('')
     // 编辑时，将日期回显通过moment包裹起来
     if (formData.birthday) {
       formData.birthday = moment(formData.birthday)
@@ -65,36 +53,9 @@ const EditForm = (props) => {
     if (formData.contract_expire) {
       formData.contract_expire = moment(formData.contract_expire)
     }
-    if (formData.avatar) {
-      setImageUrl(formData.avatar)
-    }
     form.resetFields()
     form.setFieldsValue(formData)
   }, [form, formData])
-
-  const normFile = (e) => {
-    console.log('Upload event:', e)
-    if (Array.isArray(e)) {
-      return e
-    }
-    return e && e.fileList
-  }
-  function getBase64(img, callback) {
-    const reader = new FileReader()
-    reader.addEventListener('load', () => callback(reader.result))
-    reader.readAsDataURL(img)
-  }
-  const handleChange = (info) => {
-    if (info.file.status === 'uploading') {
-      return setUploadLoading(true)
-    }
-    if (info.file.status === 'done') {
-      getBase64(info.file.originFileObj, (imgUrl) => {
-        setUploadLoading(false)
-        setImageUrl(imgUrl)
-      })
-    }
-  }
 
   return (
     <Modal
@@ -347,32 +308,13 @@ const EditForm = (props) => {
           </Col>
         </Row>
         <Row>
-          <Form.Item
+          <UploadImg
+            imgUrl={formData.avatar}
+            uploadUrl="/players/upload"
             label="头像:"
             name="avatar"
             valuePropName="avatar"
-            getValueFromEvent={normFile}
-            style={{marginTop: 10, marginLeft: 60}}
-          >
-            <Upload
-              name="file"
-              listType="picture-card"
-              className="avatar-uploader"
-              showUploadList={false}
-              action={`${baseUrl}/players/upload`}
-              headers={{ Authorization: 'Bearer ' + token }}
-              onChange={handleChange}
-            >
-              {imageUrl ? (
-                <img src={imageUrl} alt="avatar" style={{ width: '100%' }} />
-              ) : (
-                <div>
-                  {uploadLoading ? <LoadingOutlined /> : <PlusOutlined />}
-                  <div style={{ marginTop: 8 }}>Upload</div>
-                </div>
-              )}
-            </Upload>
-          </Form.Item>
+          />
         </Row>
       </Form>
     </Modal>

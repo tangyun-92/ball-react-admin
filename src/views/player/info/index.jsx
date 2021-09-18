@@ -2,7 +2,7 @@
  * @Author: 唐云
  * @Date: 2021-08-26 14:32:55
  * @Last Modified by: 唐云
- * @Last Modified time: 2021-09-18 10:31:31
+ * @Last Modified time: 2021-09-18 14:29:52
  * 球员信息
  */
 import React, { useState, useEffect, memo } from 'react'
@@ -79,6 +79,7 @@ const PlayerInfo = () => {
    */
   const handleOk = (form) => {
     form.validateFields().then((values) => {
+      console.log(values)
       let avatar = ''
       if (typeof values.avatar === 'object') {
         avatar = values.avatar[0].response.url
