@@ -2,7 +2,7 @@
  * @Author: 唐云
  * @Date: 2021-08-26 14:32:55
  * @Last Modified by: 唐云
- * @Last Modified time: 2021-09-18 15:24:55
+ * @Last Modified time: 2021-09-18 17:05:22
  * 球员信息
  */
 import React, { useState, useEffect, memo } from 'react'
@@ -10,7 +10,7 @@ import { Table, Button, Pagination, message, Rate } from 'antd'
 import EditForm from './components/EditForm'
 import SearchForm from './components/SearchForm'
 import './index.less'
-import { getPlayer, createOrEditPlayer, delPlayer } from '@/api/player/info'
+import { getPlayer, createOrEditPlayer, delPlayer, getPlayerAbility, updatePlayerAbility } from '@/api/player/info'
 import { getTeam, getNation } from '@/api/public'
 import { filterDictData } from '@/utils'
 import { useDispatch, useSelector, shallowEqual } from 'react-redux'
@@ -26,6 +26,7 @@ const { Column } = Table
 const PlayerInfo = () => {
   const [teamList, setTeamList] = useState([])
   const [nationList, setNationList] = useState([])
+  const [playerId, setPlayerId] = useState(null) // 球员id
 
   const { tableLoading, currentPage, total, tableData } = useSelector(
     (state) => ({
@@ -39,8 +40,11 @@ const PlayerInfo = () => {
 
   const dispatch = useDispatch()
   useEffect(() => {
+    // 获取球员列表
     dispatch(getTableListAction(getPlayer))
+    // 获取球队列表
     getTeamList()
+    // 获取国家列表
     getNationList()
   }, [dispatch])
 
@@ -56,30 +60,21 @@ const PlayerInfo = () => {
     getListApi: getPlayer,
   })
 
-  /**
-   * 获取球队列表
-   */
+  // 获取球队列表
   const getTeamList = () => {
     getTeam().then((res) => {
       setTeamList(res.data.records)
     })
   }
-
-  /**
-   * 获取国家列表
-   */
+  // 获取国家列表
   const getNationList = () => {
     getNation().then((res) => {
       setNationList(res.data.records)
     })
   }
-
-  /**
-   * 新增/编辑提交
-   */
+  // 新增/编辑提交
   const handleOk = (form) => {
     form.validateFields().then((values) => {
-      console.log(values)
       let avatar = ''
       if (typeof values.avatar === 'object') {
         avatar = values.avatar[0].response.url
@@ -114,6 +109,7 @@ const PlayerInfo = () => {
         })
     })
   }
+
   /**
    * 搜索
    */
@@ -121,6 +117,78 @@ const PlayerInfo = () => {
     form.validateFields().then((values) => {
       dispatch(changeSearchDataAction(values))
       dispatch(getTableListAction(getPlayer))
+    })
+  }
+
+  /**
+   * 能力值
+   */
+  const defaultAbilityFormData = {
+    comprehensive: '',
+    speed: '',
+    shoot: '',
+    pass: '',
+    dribbling: '',
+    defend: '',
+    power: '',
+    cross: '',
+    heading: '',
+    short_pass: '',
+    volley: '',
+    arc: '',
+    free_kick: '',
+    long_pass: '',
+    ball_control: '',
+    speed_up: '',
+    agility: '',
+    reaction: '',
+    balance: '',
+    shooting_power: '',
+    bounce: '',
+    stamina: '',
+    strong: '',
+    long_shot: '',
+    aggressiveness: '',
+    intercept_awareness: '',
+    positioning: '',
+    view: '',
+    penalty_kick: '',
+    marking: '',
+    break_off: '',
+    slide_tackle: '',
+    m_fish_dive: '',
+    m_hand_shape: '',
+    m_open_ball: '',
+    m_stance: '',
+    m_reaction: '',
+    player_id: null,
+  }
+  const [abilityFormData, setAbilityFormData] = useState([])
+  const [abilityFormVisible, setAbilityFormVisible] = useState(false)
+  // 显示弹窗
+  const handleEditAbility = (row) => {
+    setAbilityFormVisible(true)
+    setPlayerId(row.id)
+    getPlayerAbility({
+      id: row.id
+    }).then(res => {
+      if (res.data.records) {
+        setAbilityFormData(res.data.records)
+      } else {
+        setAbilityFormData(defaultAbilityFormData)
+      }
+    })
+  }
+  // 能力值提交
+  const abilityHandleOk = (form) => {
+    form.validateFields().then(values => {
+      updatePlayerAbility({
+        ...values,
+        player_id: playerId,
+      }).then((res) => {
+        message.success(res.message)
+        setAbilityFormVisible(false)
+      })
     })
   }
 
@@ -269,7 +337,9 @@ const PlayerInfo = () => {
               >
                 删除
               </Button>
-              <Button type="link">能力值</Button>
+              <Button type="link" onClick={(e) => handleEditAbility(row)}>
+                能力值
+              </Button>
             </span>
           )}
         />
@@ -294,7 +364,12 @@ const PlayerInfo = () => {
         onCancel={handleCancel}
         onOk={handleOk}
       />
-      <AbilityForm />
+      <AbilityForm
+        formData={abilityFormData}
+        visible={abilityFormVisible}
+        onCancel={e => setAbilityFormVisible(false)}
+        onOk={abilityHandleOk}
+      />
     </div>
   )
 }
