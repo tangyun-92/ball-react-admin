@@ -2,7 +2,7 @@
  * @Author: 唐云
  * @Date: 2021-08-27 17:07:35
  * @Last Modified by: 唐云
- * @Last Modified time: 2021-09-17 16:29:55
+ * @Last Modified time: 2021-09-18 10:36:31
  * 球员信息 - 新增/编辑
  */
 import React, { memo, useEffect, useState } from 'react'
@@ -38,7 +38,6 @@ const EditForm = (props) => {
     strong_point,
     weak_point,
   } = formData
-  console.log(formData)
   const [form] = Form.useForm()
   const title = id ? '编辑' : '新增'
   const formItemLayout = {
@@ -86,7 +85,6 @@ const EditForm = (props) => {
     reader.readAsDataURL(img)
   }
   const handleChange = (info) => {
-    console.log(info)
     if (info.file.status === 'uploading') {
       return setUploadLoading(true)
     }
@@ -95,7 +93,6 @@ const EditForm = (props) => {
         setUploadLoading(false)
         setImageUrl(imgUrl)
       })
-      formData.avatar = info.file.response.url
     }
   }
 
@@ -113,7 +110,7 @@ const EditForm = (props) => {
           <Col span={8}>
             <Form.Item
               label="姓名:"
-              name="name"
+              name="editName"
               rules={[{ required: true, message: '请输入!' }]}
               initialValue={name}
             >
@@ -123,7 +120,7 @@ const EditForm = (props) => {
           <Col span={8}>
             <Form.Item
               label="英文名:"
-              name="english_name"
+              name="editEnglish"
               rules={[{ required: true, message: '请输入!' }]}
               initialValue={english_name}
             >
@@ -350,12 +347,13 @@ const EditForm = (props) => {
           </Col>
         </Row>
         <Row>
-          {/* <Form.Item
+          <Form.Item
             label="头像:"
             name="avatar"
-            // valuePropName="fileList"
-            // getValueFromEvent={normFile}
-          > */}
+            valuePropName="avatar"
+            getValueFromEvent={normFile}
+            style={{marginTop: 10, marginLeft: 60}}
+          >
             <Upload
               name="file"
               listType="picture-card"
@@ -363,7 +361,6 @@ const EditForm = (props) => {
               showUploadList={false}
               action={`${baseUrl}/players/upload`}
               headers={{ Authorization: 'Bearer ' + token }}
-              // beforeUpload={beforeUpload}
               onChange={handleChange}
             >
               {imageUrl ? (
@@ -375,7 +372,7 @@ const EditForm = (props) => {
                 </div>
               )}
             </Upload>
-          {/* </Form.Item> */}
+          </Form.Item>
         </Row>
       </Form>
     </Modal>
