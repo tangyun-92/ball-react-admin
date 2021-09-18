@@ -52,18 +52,26 @@ export function getMenuItemInMenuListByProperty(menuList, key, value) {
 }
 
 /**
- *
+ * 
  * @param {String} code 对应码表的code
  * @param {String | Number} val 需要被过滤的值
  * @returns val存在，返回码表对应的值，val不存在，返回指定code下的children
  */
-export function filterDict(code, val) {
+export function filterDict(code) {
+  const dictList = store.getState().baseData.dictList
+  const list = dictList && dictList.find((item) => item.code === code)
+  return list && list.children
+}
+
+/**
+ * 
+ * @param {*} code 
+ * @param {*} val 
+ * @returns 
+ */
+export function filterDictData(code, val) {
   const dictList = store.getState().baseData.dictList
   const list = dictList && dictList.find((item) => item.code === code)
   const res = list && list.children.find((item) => item.code === val)
-  if (val) {
-    return res && res.name
-  } else {
-    return list && list.children
-  }
+  return res && res.name
 }

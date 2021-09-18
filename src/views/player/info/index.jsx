@@ -2,23 +2,24 @@
  * @Author: 唐云
  * @Date: 2021-08-26 14:32:55
  * @Last Modified by: 唐云
- * @Last Modified time: 2021-09-18 14:29:52
+ * @Last Modified time: 2021-09-18 15:24:55
  * 球员信息
  */
 import React, { useState, useEffect, memo } from 'react'
-import { Table, Button, Pagination, Divider, message, Rate } from 'antd'
-import EditForm from './components/editForm'
-import SearchForm from './components/searchForm'
+import { Table, Button, Pagination, message, Rate } from 'antd'
+import EditForm from './components/EditForm'
+import SearchForm from './components/SearchForm'
 import './index.less'
 import { getPlayer, createOrEditPlayer, delPlayer } from '@/api/player/info'
 import { getTeam, getNation } from '@/api/public'
-import { filterDict } from '@/utils'
+import { filterDictData } from '@/utils'
 import { useDispatch, useSelector, shallowEqual } from 'react-redux'
 import {
   getTableListAction,
   changeSearchDataAction,
 } from '@/store/common/actionCreators'
 import useSystemDataHooks from '@/hooks/useSystemDataHooks'
+import AbilityForm from './components/AbilityForm'
 
 const { Column } = Table
 
@@ -26,16 +27,15 @@ const PlayerInfo = () => {
   const [teamList, setTeamList] = useState([])
   const [nationList, setNationList] = useState([])
 
-  const { tableLoading, currentPage, total, tableData } = 
-    useSelector(
-      (state) => ({
-        tableLoading: state.common.get('tableLoading'),
-        currentPage: state.common.get('currentPage'),
-        total: state.common.get('total'),
-        tableData: state.common.get('tableData'),
-      }),
-      shallowEqual
-    )
+  const { tableLoading, currentPage, total, tableData } = useSelector(
+    (state) => ({
+      tableLoading: state.common.tableLoading,
+      currentPage: state.common.currentPage,
+      total: state.common.total,
+      tableData: state.common.tableData,
+    }),
+    shallowEqual
+  )
 
   const dispatch = useDispatch()
   useEffect(() => {
@@ -97,7 +97,7 @@ const PlayerInfo = () => {
         technical_feature: values.technical_feature || [],
         avatar,
         english_name: values.editEnglish,
-        name: values.editName
+        name: values.editName,
       }
       const formData = dataHooks.formData
       if (formData.id) {
@@ -187,7 +187,7 @@ const PlayerInfo = () => {
           key="position"
           align="center"
           render={(position) => {
-            return <span>{filterDict('wz', position)}</span>
+            return <span>{filterDictData('wz', position)}</span>
           }}
         />
         <Column
@@ -196,7 +196,7 @@ const PlayerInfo = () => {
           key="feet"
           align="center"
           render={(feet) => {
-            return <span>{filterDict('gyj', feet)}</span>
+            return <span>{filterDictData('gyj', feet)}</span>
           }}
         />
         <Column
@@ -246,7 +246,7 @@ const PlayerInfo = () => {
         <Column
           title="操作"
           key="action"
-          width={170}
+          width={240}
           align="center"
           fixed="right"
           render={(text, row) => (
@@ -254,7 +254,6 @@ const PlayerInfo = () => {
               <Button type="link" onClick={(e) => handleEdit(row)}>
                 编辑
               </Button>
-              <Divider type="vertical" />
               <Button
                 type="link"
                 onClick={(e) =>
@@ -270,13 +269,14 @@ const PlayerInfo = () => {
               >
                 删除
               </Button>
+              <Button type="link">能力值</Button>
             </span>
           )}
         />
       </Table>
       <Pagination
         total={total}
-        pageSizeOptions={['10', '20', '40']}
+        pageSizeOptions={['10', '20', '50', '100']}
         showTotal={(total) => `共${total}条数据`}
         onChange={handleSizeChange}
         current={currentPage}
@@ -294,6 +294,7 @@ const PlayerInfo = () => {
         onCancel={handleCancel}
         onOk={handleOk}
       />
+      <AbilityForm />
     </div>
   )
 }

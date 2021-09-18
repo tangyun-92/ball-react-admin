@@ -8,7 +8,7 @@ const Hamburger = () => {
 
   const { sidebarCollapsed } = useSelector(
     (state) => ({
-      sidebarCollapsed: state.settings.get('sidebarCollapsed')
+      sidebarCollapsed: state.settings.sidebarCollapsed
     }),
     shallowEqual
   )

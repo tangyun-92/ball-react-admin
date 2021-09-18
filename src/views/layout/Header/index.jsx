@@ -22,9 +22,9 @@ const LayoutHeader = (props) => {
     (state) => ({
       // token: state.user.get('token'),
       // avatar: state.user.get('avatar'),
-      sidebarCollapsed: state.app.get('sidebarCollapsed'),
-      showSettings: state.settings.get('showSettings'),
-      fixedHeader: state.settings.get('fixedHeader'),
+      sidebarCollapsed: state.app.sidebarCollapsed,
+      showSettings: state.settings.showSettings,
+      fixedHeader: state.settings.fixedHeader,
     }),
     shallowEqual
   )

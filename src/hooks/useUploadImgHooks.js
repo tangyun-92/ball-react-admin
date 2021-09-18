@@ -12,6 +12,7 @@ export default function({
   const [imageUrl, setImageUrl] = useState('')
 
   useEffect(() => {
+    setImageUrl('')
     if (url) {
       setImageUrl(url)
     }

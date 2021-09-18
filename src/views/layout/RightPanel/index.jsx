@@ -16,10 +16,10 @@ const RightPanel = (props) => {
 
   let { settingPanelVisible, sidebarLogo, fixedHeader, tagsView } = useSelector(
     (state) => ({
-      settingPanelVisible: state.app.get('settingPanelVisible'),
-      sidebarLogo: state.settings.get('sidebarLogo'),
-      fixedHeader: state.settings.get('fixedHeader'),
-      tagsView: state.settings.get('tagsView'),
+      settingPanelVisible: state.app.settingPanelVisible,
+      sidebarLogo: state.settings.sidebarLogo,
+      fixedHeader: state.settings.fixedHeader,
+      tagsView: state.settings.tagsView,
     }),
     shallowEqual
   )

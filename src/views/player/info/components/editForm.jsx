@@ -2,7 +2,7 @@
  * @Author: 唐云
  * @Date: 2021-08-27 17:07:35
  * @Last Modified by: 唐云
- * @Last Modified time: 2021-09-18 14:29:18
+ * @Last Modified time: 2021-09-18 15:17:35
  * 球员信息 - 新增/编辑
  */
 import React, { memo, useEffect } from 'react'
@@ -157,8 +157,8 @@ const EditForm = (props) => {
             >
               <Select showSearch optionFilterProp="children">
                 {filterDict('wz') &&
-                  filterDict('wz').map((val) => (
-                    <Select.Option value={val.code} key={val.code}>
+                  filterDict('wz').map((val, index) => (
+                    <Select.Option value={val.code} key={val.code + index}>
                       {val.name}
                     </Select.Option>
                   ))}
@@ -176,8 +176,8 @@ const EditForm = (props) => {
             >
               <Select showSearch optionFilterProp="children">
                 {filterDict('gyj') &&
-                  filterDict('gyj').map((val) => (
-                    <Select.Option value={val.code} key={val.code}>
+                  filterDict('gyj').map((val, index) => (
+                    <Select.Option value={val.code} key={val.code + index}>
                       {val.name}
                     </Select.Option>
                   ))}
@@ -194,7 +194,7 @@ const EditForm = (props) => {
               <Select showSearch optionFilterProp="children">
                 {filterDict('star') &&
                   filterDict('star').map((val) => (
-                    <Select.Option value={val.code} key={val.code}>
+                    <Select.Option value={val.code} key={val.code + 'c'}>
                       {val.name}
                     </Select.Option>
                   ))}
@@ -211,7 +211,7 @@ const EditForm = (props) => {
               <Select showSearch optionFilterProp="children">
                 {filterDict('star') &&
                   filterDict('star').map((val) => (
-                    <Select.Option value={val.code} key={val.code}>
+                    <Select.Option value={val.code} key={val.code + 'b'}>
                       {val.name}
                     </Select.Option>
                   ))}
@@ -230,7 +230,7 @@ const EditForm = (props) => {
               <Select showSearch optionFilterProp="children">
                 {filterDict('star') &&
                   filterDict('star').map((val) => (
-                    <Select.Option value={val.code} key={val.code}>
+                    <Select.Option value={val.code} key={val.code + 'a'}>
                       {val.name}
                     </Select.Option>
                   ))}
@@ -266,8 +266,8 @@ const EditForm = (props) => {
             >
               <Select mode="multiple" optionFilterProp="children">
                 {filterDict('jstd') &&
-                  filterDict('jstd').map((val) => (
-                    <Select.Option value={val.code} key={val.code}>
+                  filterDict('jstd').map((val, index) => (
+                    <Select.Option value={val.code} key={val.code + index}>
                       {val.name}
                     </Select.Option>
                   ))}
@@ -282,8 +282,8 @@ const EditForm = (props) => {
             >
               <Select mode="multiple" optionFilterProp="children">
                 {filterDict('qrx') &&
-                  filterDict('qrx').map((val) => (
-                    <Select.Option value={val.code} key={val.code}>
+                  filterDict('qrx').map((val, index) => (
+                    <Select.Option value={val.code} key={val.code + index}>
                       {val.name}
                     </Select.Option>
                   ))}

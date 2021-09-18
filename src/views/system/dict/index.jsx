@@ -2,7 +2,7 @@
  * @Author: 唐云
  * @Date: 2021-08-26 14:32:55
  * @Last Modified by: 唐云
- * @Last Modified time: 2021-09-17 13:55:19
+ * @Last Modified time: 2021-09-18 15:02:03
  * 字典管理
  */
 import React, { memo, useEffect, useState } from 'react'
@@ -30,8 +30,8 @@ const Dict = (props) => {
 
   const { tableData, tableLoading } = useSelector(
     (state) => ({
-      tableData: state.common.get('tableData'),
-      tableLoading: state.common.get('tableLoading'),
+      tableData: state.common.tableData,
+      tableLoading: state.common.tableLoading,
     }),
     shallowEqual
   )

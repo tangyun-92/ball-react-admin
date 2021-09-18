@@ -8,8 +8,8 @@ const { Sider } = Layout
 const LayoutSider = () => {
   const { sidebarLogo, sidebarCollapsed } = useSelector(
     (state) => ({
-      sidebarLogo: state.settings.get('sidebarLogo'),
-      sidebarCollapsed: state.app.get('sidebarCollapsed'),
+      sidebarLogo: state.settings.sidebarLogo,
+      sidebarCollapsed: state.app.sidebarCollapsed,
     }),
     shallowEqual
   )

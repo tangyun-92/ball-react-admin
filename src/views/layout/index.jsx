@@ -12,7 +12,7 @@ import { getDictListAction } from '@/store/base-data/actionCreators'
 const Main = () => {
   const { tagsView } = useSelector(
     (state) => ({
-      tagsView: state.settings.get('tagsView'),
+      tagsView: state.settings.tagsView,
     }),
     shallowEqual
   )

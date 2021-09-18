@@ -70,9 +70,9 @@ export const changeModalTitleAction = (modalTitle) => ({
 export const getTableListAction = (getListApi) => {
   return (dispatch, getState) => {
     dispatch(changeTableLoadingAction(true))
-    const searchData = getState().common.get('searchData')
-    const currentPage = getState().common.get('currentPage')
-    const pageSize = getState().common.get('pageSize')
+    const searchData = getState().common.searchData
+    const currentPage = getState().common.currentPage
+    const pageSize = getState().common.pageSize
     getListApi({
       ...searchData,
       currentPage,

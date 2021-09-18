@@ -14,7 +14,7 @@ import { useCallback } from 'react'
 const TagList = (props) => {
   const { taglist } = useSelector(
     (state) => ({
-      taglist: state.tags.get('taglist')
+      taglist: state.tags.taglist
     }),
     shallowEqual
   )
