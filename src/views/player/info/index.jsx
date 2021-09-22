@@ -2,7 +2,7 @@
  * @Author: 唐云
  * @Date: 2021-08-26 14:32:55
  * @Last Modified by: 唐云
- * @Last Modified time: 2021-09-22 10:19:05
+ * @Last Modified time: 2021-09-22 10:45:45
  * 球员信息
  */
 import React, { useState, useEffect, memo } from 'react'
@@ -10,7 +10,7 @@ import { Table, Button, Pagination, message, Rate } from 'antd'
 import EditForm from './components/EditForm'
 import SearchForm from './components/SearchForm'
 import './index.less'
-import { getPlayer, createOrEditPlayer, delPlayer, getPlayerAbility, updatePlayerAbility } from '@/api/player/info'
+import { getPlayer, createOrEditPlayer, delPlayer, getPlayerAbility, updatePlayerAbility, getPlayerPosition, updatePlayerPosition } from '@/api/player/info'
 import { getTeam, getNation } from '@/api/public'
 import { filterDictData } from '@/utils'
 import { useDispatch, useSelector, shallowEqual } from 'react-redux'
@@ -20,6 +20,7 @@ import {
 } from '@/store/common/actionCreators'
 import useSystemDataHooks from '@/hooks/useSystemDataHooks'
 import AbilityForm from './components/AbilityForm'
+import PositionForm from './components/PositionForm'
 
 const { Column } = Table
 
@@ -192,6 +193,55 @@ const PlayerInfo = () => {
     })
   }
 
+  /**
+   * 位置
+   */
+  const defaultPositionFormData = {
+    CF: '',
+    LW: '',
+    RW: '',
+    LM: '',
+    RM: '',
+    SF: '',
+    AMF: '',
+    CMF: '',
+    DM: '',
+    WL: '',
+    WR: '',
+    LB: '',
+    RB: '',
+    CB: '',
+    GK: '',
+  }
+  const [positionFormData, setPositionFormData] = useState([])
+  const [positionFormVisible, setPositionFormVisible] = useState(false)
+  // 显示弹窗
+  const handleEditPosition = (row) => {
+    setPositionFormVisible(true)
+    setPlayerId(row.id)
+    getPlayerPosition({
+      id: row.id
+    }).then(res => {
+      if (res.data.records) {
+        setPositionFormData(res.data.records)
+      } else {
+        setPositionFormData(defaultPositionFormData)
+      }
+    })
+  }
+  // 位置提交
+  const positionHandleOk = (form) => {
+    form.validateFields().then(values => {
+      updatePlayerPosition({
+        ...values,
+        player_id: playerId
+      }).then(res => {
+        message.success(res.message)
+        setPositionFormVisible(false)
+      })
+    })
+  }
+
   return (
     <div className="container">
       <div className="search-container">
@@ -340,6 +390,9 @@ const PlayerInfo = () => {
               <Button type="link" onClick={(e) => handleEditAbility(row)}>
                 能力值
               </Button>
+              <Button type="link" onClick={(e) => handleEditPosition(row)}>
+                位置
+              </Button>
             </span>
           )}
         />
@@ -367,8 +420,14 @@ const PlayerInfo = () => {
       <AbilityForm
         formData={abilityFormData}
         visible={abilityFormVisible}
-        onCancel={e => setAbilityFormVisible(false)}
+        onCancel={(e) => setAbilityFormVisible(false)}
         onOk={abilityHandleOk}
+      />
+      <PositionForm
+        formData={positionFormData}
+        visible={positionFormVisible}
+        onCancel={(e) => setPositionFormVisible(false)}
+        onOk={positionHandleOk}
       />
     </div>
   )
