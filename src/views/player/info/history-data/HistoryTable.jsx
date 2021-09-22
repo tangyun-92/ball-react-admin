@@ -2,7 +2,7 @@
  * @Author: 唐云
  * @Date: 2021-09-22 11:29:56
  * @Last Modified by: 唐云
- * @Last Modified time: 2021-09-22 15:28:11
+ * @Last Modified time: 2021-09-22 15:46:54
  * 历史数据
  */
 import React, { memo, useEffect, useState } from 'react'
@@ -13,7 +13,7 @@ import {
   getPlayerData,
   updatePlayerData,
 } from '@/api/player/info'
-import EditDataForm from '../components/EditDataForm'
+import HistoryForm from './HistoryForm'
 
 const { Column } = Table
 
@@ -217,7 +217,7 @@ const AbilityForm = (props) => {
           )}
         />
       </Table>
-      <EditDataForm
+      <HistoryForm
         formData={dataHooks.formData}
         visible={dataHooks.formDialogVisible}
         onCancel={handleCancel}

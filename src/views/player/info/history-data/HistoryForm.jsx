@@ -2,7 +2,7 @@
  * @Author: 唐云
  * @Date: 2021-09-22 11:30:28
  * @Last Modified by: 唐云
- * @Last Modified time: 2021-09-22 14:45:14
+ * @Last Modified time: 2021-09-22 15:45:57
  * 历史数据 - 新增/编辑
  */
 import React, { memo, useEffect } from 'react'
@@ -45,9 +45,6 @@ const AbilityForm = (props) => {
   }
 
   useEffect(() => {
-    // if (shoot) {
-    //   dataShoot = shoot
-    // }
     form.resetFields()
     form.setFieldsValue(formData)
   }, [form, formData])

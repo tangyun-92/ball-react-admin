@@ -2,7 +2,7 @@
  * @Author: 唐云
  * @Date: 2021-08-26 14:32:55
  * @Last Modified by: 唐云
- * @Last Modified time: 2021-09-22 15:34:40
+ * @Last Modified time: 2021-09-22 15:48:38
  * 球员信息
  */
 import React, { useState, useEffect, memo } from 'react'
@@ -30,7 +30,7 @@ import {
 import useSystemDataHooks from '@/hooks/useSystemDataHooks'
 import AbilityForm from './components/AbilityForm'
 import PositionForm from './components/PositionForm'
-import DataTable from './components/DataTable'
+import HistoryTable from './history-data/HistoryTable'
 
 const { Column } = Table
 
@@ -255,17 +255,11 @@ const PlayerInfo = () => {
   /**
    * 历史数据
    */
-  const [dataTableData, setDataTableData] = useState([])
-  const [dataFormVisible, setDataFormVisible] = useState(false)
+  const [historyVisible, setHistoryVisible] = useState(false)
   // 显示弹窗-获取指定球员历史数据
-  const handleEditData = (row) => {
-    setDataFormVisible(true)
+  const handleEditHistory = (row) => {
+    setHistoryVisible(true)
     setPlayerId(row.id)
-    getPlayerData({
-      id: row.id,
-    }).then((res) => {
-      setDataTableData(res.data.records)
-    })
   }
 
   return (
@@ -420,7 +414,7 @@ const PlayerInfo = () => {
               <Button type="link" onClick={(e) => handleEditPosition(row)}>
                 位置
               </Button>
-              <Button type="link" onClick={(e) => handleEditData(row)}>
+              <Button type="link" onClick={(e) => handleEditHistory(row)}>
                 历史数据
               </Button>
             </span>
@@ -459,10 +453,9 @@ const PlayerInfo = () => {
         onCancel={(e) => setPositionFormVisible(false)}
         onOk={positionHandleOk}
       />
-      <DataTable
-        tableData={dataTableData}
-        visible={dataFormVisible}
-        onCancel={(e) => setDataFormVisible(false)}
+      <HistoryTable
+        visible={historyVisible}
+        onCancel={(e) => setHistoryVisible(false)}
         player_id={playerId}
       />
     </div>
