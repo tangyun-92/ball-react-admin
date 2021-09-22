@@ -1,3 +1,10 @@
+/*
+ * @Author: 唐云 
+ * @Date: 2021-09-22 11:30:06 
+ * @Last Modified by: 唐云
+ * @Last Modified time: 2021-09-22 14:00:25
+ * 能力值 Form
+ */
 import React, { memo, useEffect } from 'react'
 import { Col, Form, Input, Modal, Row } from 'antd'
 

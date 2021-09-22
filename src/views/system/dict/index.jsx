@@ -2,7 +2,7 @@
  * @Author: 唐云
  * @Date: 2021-08-26 14:32:55
  * @Last Modified by: 唐云
- * @Last Modified time: 2021-09-18 15:02:03
+ * @Last Modified time: 2021-09-22 11:23:28
  * 字典管理
  */
 import React, { memo, useEffect, useState } from 'react'
@@ -75,7 +75,9 @@ const Dict = (props) => {
    * 新增/编辑提交
    */
   const handleOk = (form) => {
-    form.validateFields().then((values) => {
+    form
+      .validateFields()
+      .then((values) => {
         const formData = dataHooks.formData // 点击行数据
         const createType = dataHooks.dictCreateType // 新增类型
         console.log(createType)
@@ -143,14 +145,12 @@ const Dict = (props) => {
       <div className="dict-main">
         <div className="table-container">
           <div className="opera-container">
-            <Button
-              type="primary"
-              onClick={(e) => handleCreate('dictType')}
-            >
+            <Button type="primary" onClick={(e) => handleCreate('dictType')}>
               新增
             </Button>
           </div>
           <Table
+            className="table"
             size="small"
             rowKey={(record) => record.id}
             dataSource={dictTypeData}
@@ -192,7 +192,6 @@ const Dict = (props) => {
                   <Button type="link" onClick={(e) => handleEdit(row)}>
                     编辑
                   </Button>
-                  <Divider type="vertical" />
                   <Button
                     type="link"
                     onClick={(e) =>
@@ -289,4 +288,4 @@ const Dict = (props) => {
   )
 }
 
-export default (memo(Dict))
+export default memo(Dict)

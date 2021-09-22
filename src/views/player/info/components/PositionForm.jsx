@@ -1,3 +1,10 @@
+/*
+ * @Author: 唐云 
+ * @Date: 2021-09-22 11:30:28 
+ * @Last Modified by: 唐云
+ * @Last Modified time: 2021-09-22 15:34:30
+ * 位置 Form
+ */
 import React, { memo, useEffect } from 'react'
 import { Col, Form, Input, Modal, Row } from 'antd'
 
@@ -39,7 +46,7 @@ const AbilityForm = (props) => {
     <Modal
       forceRender
       width={1100}
-      title="能力值"
+      title="位置"
       visible={visible}
       onCancel={onCancel}
       onOk={(e) => onOk(form)}

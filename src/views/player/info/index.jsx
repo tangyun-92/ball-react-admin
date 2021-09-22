@@ -2,7 +2,7 @@
  * @Author: 唐云
  * @Date: 2021-08-26 14:32:55
  * @Last Modified by: 唐云
- * @Last Modified time: 2021-09-22 10:45:45
+ * @Last Modified time: 2021-09-22 15:34:40
  * 球员信息
  */
 import React, { useState, useEffect, memo } from 'react'
@@ -10,7 +10,16 @@ import { Table, Button, Pagination, message, Rate } from 'antd'
 import EditForm from './components/EditForm'
 import SearchForm from './components/SearchForm'
 import './index.less'
-import { getPlayer, createOrEditPlayer, delPlayer, getPlayerAbility, updatePlayerAbility, getPlayerPosition, updatePlayerPosition } from '@/api/player/info'
+import {
+  getPlayer,
+  createOrEditPlayer,
+  delPlayer,
+  getPlayerAbility,
+  updatePlayerAbility,
+  getPlayerPosition,
+  updatePlayerPosition,
+  getPlayerData,
+} from '@/api/player/info'
 import { getTeam, getNation } from '@/api/public'
 import { filterDictData } from '@/utils'
 import { useDispatch, useSelector, shallowEqual } from 'react-redux'
@@ -21,12 +30,13 @@ import {
 import useSystemDataHooks from '@/hooks/useSystemDataHooks'
 import AbilityForm from './components/AbilityForm'
 import PositionForm from './components/PositionForm'
+import DataTable from './components/DataTable'
 
 const { Column } = Table
 
 const PlayerInfo = () => {
-  const [teamList, setTeamList] = useState([])
-  const [nationList, setNationList] = useState([])
+  const [teamList, setTeamList] = useState([]) // 球队列表
+  const [nationList, setNationList] = useState([]) // 国家列表
   const [playerId, setPlayerId] = useState(null) // 球员id
 
   const { tableLoading, currentPage, total, tableData } = useSelector(
@@ -166,13 +176,13 @@ const PlayerInfo = () => {
   }
   const [abilityFormData, setAbilityFormData] = useState([])
   const [abilityFormVisible, setAbilityFormVisible] = useState(false)
-  // 显示弹窗
+  // 显示弹窗-获取指定球员能力值
   const handleEditAbility = (row) => {
     setAbilityFormVisible(true)
     setPlayerId(row.id)
     getPlayerAbility({
-      id: row.id
-    }).then(res => {
+      id: row.id,
+    }).then((res) => {
       if (res.data.records) {
         setAbilityFormData(res.data.records)
       } else {
@@ -182,7 +192,7 @@ const PlayerInfo = () => {
   }
   // 能力值提交
   const abilityHandleOk = (form) => {
-    form.validateFields().then(values => {
+    form.validateFields().then((values) => {
       updatePlayerAbility({
         ...values,
         player_id: playerId,
@@ -215,13 +225,13 @@ const PlayerInfo = () => {
   }
   const [positionFormData, setPositionFormData] = useState([])
   const [positionFormVisible, setPositionFormVisible] = useState(false)
-  // 显示弹窗
+  // 显示弹窗-获取指定球员位置值
   const handleEditPosition = (row) => {
     setPositionFormVisible(true)
     setPlayerId(row.id)
     getPlayerPosition({
-      id: row.id
-    }).then(res => {
+      id: row.id,
+    }).then((res) => {
       if (res.data.records) {
         setPositionFormData(res.data.records)
       } else {
@@ -231,19 +241,35 @@ const PlayerInfo = () => {
   }
   // 位置提交
   const positionHandleOk = (form) => {
-    form.validateFields().then(values => {
+    form.validateFields().then((values) => {
       updatePlayerPosition({
         ...values,
-        player_id: playerId
-      }).then(res => {
+        player_id: playerId,
+      }).then((res) => {
         message.success(res.message)
         setPositionFormVisible(false)
       })
     })
   }
 
+  /**
+   * 历史数据
+   */
+  const [dataTableData, setDataTableData] = useState([])
+  const [dataFormVisible, setDataFormVisible] = useState(false)
+  // 显示弹窗-获取指定球员历史数据
+  const handleEditData = (row) => {
+    setDataFormVisible(true)
+    setPlayerId(row.id)
+    getPlayerData({
+      id: row.id,
+    }).then((res) => {
+      setDataTableData(res.data.records)
+    })
+  }
+
   return (
-    <div className="container">
+    <div className="container player-info">
       <div className="search-container">
         <SearchForm onFinish={onSearchFinish} />
       </div>
@@ -253,6 +279,7 @@ const PlayerInfo = () => {
         </Button>
       </div>
       <Table
+        className="table"
         size="small"
         rowKey={(record) => record.id}
         dataSource={tableData}
@@ -393,6 +420,9 @@ const PlayerInfo = () => {
               <Button type="link" onClick={(e) => handleEditPosition(row)}>
                 位置
               </Button>
+              <Button type="link" onClick={(e) => handleEditData(row)}>
+                历史数据
+              </Button>
             </span>
           )}
         />
@@ -428,6 +458,12 @@ const PlayerInfo = () => {
         visible={positionFormVisible}
         onCancel={(e) => setPositionFormVisible(false)}
         onOk={positionHandleOk}
+      />
+      <DataTable
+        tableData={dataTableData}
+        visible={dataFormVisible}
+        onCancel={(e) => setDataFormVisible(false)}
+        player_id={playerId}
       />
     </div>
   )

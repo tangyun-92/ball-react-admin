@@ -52,7 +52,7 @@ export default function ({ getListApi, searchData }) {
     setFormDialogVisible(true)
     setDialogStatus('create')
     setDialogTitle('新增')
-    setFormData({id: null})
+    setFormData({ id: null })
   }
 
   // 编辑
@@ -106,7 +106,7 @@ export default function ({ getListApi, searchData }) {
         onOk() {
           reqFn(data).then((res) => {
             message.success(`${operation}成功`)
-            ;(success && success()) || dispatch(getTableListAction(getListApi))
+            success ? success() : dispatch(getTableListAction(getListApi))
           })
         },
         onCancel() {

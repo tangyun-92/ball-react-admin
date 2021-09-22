@@ -67,7 +67,7 @@ export const changeModalTitleAction = (modalTitle) => ({
  * 获取列表
  * @param {*} getTableListApi 获取列表的api
  */
-export const getTableListAction = (getListApi) => {
+export const getTableListAction = (getListApi, id) => {
   return (dispatch, getState) => {
     dispatch(changeTableLoadingAction(true))
     const searchData = getState().common.searchData
@@ -77,6 +77,7 @@ export const getTableListAction = (getListApi) => {
       ...searchData,
       currentPage,
       pageSize,
+      id
     })
       .then((res) => {
         dispatch(changeTableDataAction(res.data.records))
