@@ -2,10 +2,10 @@
  * @Author: 唐云
  * @Date: 2021-09-22 11:29:56
  * @Last Modified by: 唐云
- * @Last Modified time: 2021-09-22 15:46:54
+ * @Last Modified time: 2021-09-22 16:15:51
  * 历史数据
  */
-import React, { memo, useEffect, useState } from 'react'
+import React, { memo, useCallback, useEffect, useState } from 'react'
 import { Modal, Button, Table, message } from 'antd'
 import useSystemDataHooks from '@/hooks/useSystemDataHooks'
 import {
@@ -17,7 +17,7 @@ import HistoryForm from './HistoryForm'
 
 const { Column } = Table
 
-const AbilityForm = (props) => {
+const HistoryTable = (props) => {
   let { visible, onCancel, player_id } = props
   const [tableData, setTableData] = useState([])
 
@@ -31,11 +31,18 @@ const AbilityForm = (props) => {
     getListApi: getPlayerData,
   })
 
-  useEffect(() => {
+  // 获取指定球员历史数据列表
+  const getPlayerList = useCallback(() => {
     getPlayerData({ id: player_id }).then((res) => {
       setTableData(res.data.records)
     })
   }, [player_id])
+
+  useEffect(() => {
+    if (visible) {
+      getPlayerList()
+    }
+  }, [getPlayerList, visible])
 
   const handleOk = (form) => {
     form.validateFields().then((values) => {
@@ -54,13 +61,6 @@ const AbilityForm = (props) => {
         .catch((e) => {
           console.log(e)
         })
-    })
-  }
-
-  // 获取指定球员历史数据列表
-  const getPlayerList = () => {
-    getPlayerData({ id: player_id }).then((res) => {
-      setTableData(res.data.records)
     })
   }
 
@@ -227,4 +227,4 @@ const AbilityForm = (props) => {
   )
 }
 
-export default memo(AbilityForm)
+export default memo(HistoryTable)

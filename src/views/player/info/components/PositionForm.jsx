@@ -2,13 +2,13 @@
  * @Author: 唐云 
  * @Date: 2021-09-22 11:30:28 
  * @Last Modified by: 唐云
- * @Last Modified time: 2021-09-22 15:34:30
+ * @Last Modified time: 2021-09-22 16:00:12
  * 位置 Form
  */
 import React, { memo, useEffect } from 'react'
 import { Col, Form, Input, Modal, Row } from 'antd'
 
-const AbilityForm = (props) => {
+const PositionForm = (props) => {
   const { visible, onCancel, onOk, formData } = props
   const {
     CF,
@@ -140,4 +140,4 @@ const AbilityForm = (props) => {
   )
 }
 
-export default memo(AbilityForm)
+export default memo(PositionForm)

@@ -2,7 +2,7 @@
  * @Author: 唐云
  * @Date: 2021-08-26 14:32:55
  * @Last Modified by: 唐云
- * @Last Modified time: 2021-09-22 15:48:38
+ * @Last Modified time: 2021-09-22 17:07:10
  * 球员信息
  */
 import React, { useState, useEffect, memo } from 'react'
@@ -18,7 +18,6 @@ import {
   updatePlayerAbility,
   getPlayerPosition,
   updatePlayerPosition,
-  getPlayerData,
 } from '@/api/player/info'
 import { getTeam, getNation } from '@/api/public'
 import { filterDictData } from '@/utils'
@@ -31,6 +30,7 @@ import useSystemDataHooks from '@/hooks/useSystemDataHooks'
 import AbilityForm from './components/AbilityForm'
 import PositionForm from './components/PositionForm'
 import HistoryTable from './history-data/HistoryTable'
+import HonorTable from './honor-data/HonorTable'
 
 const { Column } = Table
 
@@ -256,9 +256,19 @@ const PlayerInfo = () => {
    * 历史数据
    */
   const [historyVisible, setHistoryVisible] = useState(false)
-  // 显示弹窗-获取指定球员历史数据
+  // 显示弹窗
   const handleEditHistory = (row) => {
     setHistoryVisible(true)
+    setPlayerId(row.id)
+  }
+
+  /**
+   * 荣誉记录
+   */
+  const [honorVisible, setHonorVisible] = useState(false)
+  // 显示弹窗
+  const handleEditHonor = (row) => {
+    setHonorVisible(true)
     setPlayerId(row.id)
   }
 
@@ -417,6 +427,9 @@ const PlayerInfo = () => {
               <Button type="link" onClick={(e) => handleEditHistory(row)}>
                 历史数据
               </Button>
+              <Button type="link" onClick={(e) => handleEditHonor(row)}>
+                荣誉记录
+              </Button>
             </span>
           )}
         />
@@ -456,6 +469,12 @@ const PlayerInfo = () => {
       <HistoryTable
         visible={historyVisible}
         onCancel={(e) => setHistoryVisible(false)}
+        player_id={playerId}
+      />
+      <HonorTable
+        teamList={teamList}
+        visible={honorVisible}
+        onCancel={(e) => setHonorVisible(false)}
         player_id={playerId}
       />
     </div>

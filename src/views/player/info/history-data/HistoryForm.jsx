@@ -2,13 +2,13 @@
  * @Author: 唐云
  * @Date: 2021-09-22 11:30:28
  * @Last Modified by: 唐云
- * @Last Modified time: 2021-09-22 15:45:57
+ * @Last Modified time: 2021-09-22 15:58:56
  * 历史数据 - 新增/编辑
  */
 import React, { memo, useEffect } from 'react'
 import { Col, Form, Input, Modal, Row } from 'antd'
 
-const AbilityForm = (props) => {
+const HistoryForm = (props) => {
   const { visible, onCancel, onOk, formData } = props
   let {
     time,
@@ -238,4 +238,4 @@ const AbilityForm = (props) => {
   )
 }
 
-export default memo(AbilityForm)
+export default memo(HistoryForm)

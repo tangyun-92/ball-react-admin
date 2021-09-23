@@ -75,3 +75,15 @@ export function filterDictData(code, val) {
   const res = list && list.children.find((item) => item.code === val)
   return res && res.name
 }
+
+/**
+ * 过滤是/否
+ * @param {*} val 
+ * @returns 
+ */
+export function filterWhether(val) {
+  if (val) {
+    return '是'
+  }
+  return '否'
+}
