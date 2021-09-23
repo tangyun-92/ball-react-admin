@@ -2,7 +2,7 @@
  * @Author: 唐云
  * @Date: 2021-09-22 11:30:28
  * @Last Modified by: 唐云
- * @Last Modified time: 2021-09-23 15:36:46
+ * @Last Modified time: 2021-09-23 16:42:12
  * 转会记录 - 新增/编辑
  */
 import React, { memo, useEffect } from 'react'
@@ -35,7 +35,7 @@ const TransferForm = (props) => {
     <Modal
       forceRender
       width={1100}
-      title="荣誉记录"
+      title="转会记录"
       visible={visible}
       onCancel={onCancel}
       onOk={(e) => onOk(form)}
@@ -49,13 +49,18 @@ const TransferForm = (props) => {
               rules={[{ required: true, message: '请输入!' }]}
               initialValue={time}
             >
-              <DatePicker placeholder="请选择" picker="month" format="YYYY.MM" />
+              <DatePicker
+                placeholder="请选择"
+                picker="month"
+                format="YYYY.MM"
+              />
             </Form.Item>
           </Col>
           <Col span={12}>
             <Form.Item
               label="转出球队:"
               name="old_team_id"
+              rules={[{ required: true, message: '请选择!' }]}
               initialValue={old_team_id}
             >
               <Select
@@ -94,7 +99,12 @@ const TransferForm = (props) => {
             </Form.Item>
           </Col>
           <Col span={12}>
-            <Form.Item label="价格:" name="transferPrice" initialValue={price}>
+            <Form.Item
+              label="价格:"
+              name="transferPrice"
+              rules={[{ required: true, message: '请选择!' }]}
+              initialValue={price}
+            >
               <Input placeholder="请输入" />
             </Form.Item>
           </Col>

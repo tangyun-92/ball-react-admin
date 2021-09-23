@@ -2,7 +2,7 @@
  * @Author: 唐云
  * @Date: 2021-08-26 14:32:55
  * @Last Modified by: 唐云
- * @Last Modified time: 2021-09-23 16:22:14
+ * @Last Modified time: 2021-09-23 16:26:40
  * 球员信息
  */
 import React, { useState, useEffect, memo } from 'react'
@@ -427,7 +427,7 @@ const PlayerInfo = () => {
         <Column
           title="操作"
           key="action"
-          width={240}
+          width={300}
           align="center"
           fixed="right"
           render={(text, row) => (

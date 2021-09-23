@@ -9,7 +9,7 @@ const Dict = Loadable({
   loading: Loading,
 })
 const PlayerInfo = Loadable({
-  loader: () => import('@/views/player/info'),
+  loader: () => import('@/views/data-management/player'),
   loading: Loading,
 })
 const Error404 = Loadable({

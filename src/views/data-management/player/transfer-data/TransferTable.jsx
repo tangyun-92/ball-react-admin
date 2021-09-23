@@ -2,7 +2,7 @@
  * @Author: 唐云
  * @Date: 2021-09-22 11:29:56
  * @Last Modified by: 唐云
- * @Last Modified time: 2021-09-23 15:37:12
+ * @Last Modified time: 2021-09-23 16:41:15
  * 转会记录
  */
 import React, { memo, useCallback, useEffect, useState } from 'react'
@@ -70,7 +70,7 @@ const TransferTable = (props) => {
     <Modal
       forceRender
       width={1400}
-      title="荣誉记录"
+      title="转会记录"
       visible={visible}
       footer={[
         <Button key="back" onClick={onCancel}>
