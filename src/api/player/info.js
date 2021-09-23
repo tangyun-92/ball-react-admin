@@ -2,7 +2,7 @@
  * @Author: 唐云
  * @Date: 2021-08-23 13:29:23
  * @Last Modified by: 唐云
- * @Last Modified time: 2021-09-23 13:14:00
+ * @Last Modified time: 2021-09-23 15:56:08
  * 球员信息
  */
 import request from '@/utils/request'
@@ -217,6 +217,43 @@ export function updatePlayerTransfer(data) {
 export function deletePlayerTransfer(data) {
   return request({
     url: '/players/deletePlayerTransfer',
+    method: 'post',
+    data,
+  })
+}
+
+/**
+ * 获取球员伤病记录
+ * @param {*} data
+ * @returns
+ */
+export function getPlayerInjury(data) {
+  return request({
+    url: '/players/findPlayerInjury',
+    method: 'post',
+    data
+  })
+}
+/**
+ * 更新球员伤病记录
+ * @param {*} data
+ * @returns
+ */
+export function updatePlayerInjury(data) {
+  return request({
+    url: '/players/updatePlayerInjury',
+    method: 'post',
+    data,
+  })
+}
+/**
+ * 删除球员伤病记录
+ * @param {*} data
+ * @returns
+ */
+export function deletePlayerInjury(data) {
+  return request({
+    url: '/players/deletePlayerInjury',
     method: 'post',
     data,
   })

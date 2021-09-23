@@ -2,7 +2,7 @@
  * @Author: 唐云
  * @Date: 2021-08-26 14:32:55
  * @Last Modified by: 唐云
- * @Last Modified time: 2021-09-23 13:17:58
+ * @Last Modified time: 2021-09-23 15:55:13
  * 球员信息
  */
 import React, { useState, useEffect, memo } from 'react'
@@ -32,6 +32,7 @@ import PositionForm from './components/PositionForm'
 import HistoryTable from './history-data/HistoryTable'
 import HonorTable from './honor-data/HonorTable'
 import TransferTable from './transfer-data/TransferTable'
+import InjuryTable from './injury-data/InjuryTable'
 
 const { Column } = Table
 
@@ -283,6 +284,15 @@ const PlayerInfo = () => {
     setPlayerId(row.id)
   }
 
+  /**
+   * 伤病记录
+   */
+  const [injuryVisible, setInjuryVisible] = useState(false)
+  const handleEditInjury = (row) => {
+    setInjuryVisible(true)
+    setPlayerId(row.id)
+  }
+
   return (
     <div className="container player-info">
       <div className="search-container">
@@ -444,6 +454,9 @@ const PlayerInfo = () => {
               <Button type="link" onClick={(e) => handleEditTransfer(row)}>
                 转会记录
               </Button>
+              <Button type="link" onClick={(e) => handleEditInjury(row)}>
+                伤病记录
+              </Button>
             </span>
           )}
         />
@@ -495,6 +508,12 @@ const PlayerInfo = () => {
         teamList={teamList}
         visible={transferVisible}
         onCancel={(e) => setTransferVisible(false)}
+        player_id={playerId}
+      />
+      <InjuryTable
+        teamList={teamList}
+        visible={injuryVisible}
+        onCancel={(e) => setInjuryVisible(false)}
         player_id={playerId}
       />
     </div>
