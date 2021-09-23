@@ -2,7 +2,7 @@
  * @Author: 唐云
  * @Date: 2021-09-22 11:29:56
  * @Last Modified by: 唐云
- * @Last Modified time: 2021-09-23 13:16:55
+ * @Last Modified time: 2021-09-23 16:22:22
  * 荣誉记录
  */
 import React, { memo, useCallback, useEffect, useState } from 'react'
@@ -14,15 +14,13 @@ import {
   updatePlayerHonor,
 } from '@/api/player/info'
 import HonorForm from './HonorForm'
-import { getAward } from '@/api/system/award'
 import { filterWhether } from '@/utils'
 
 const { Column } = Table
 
 const HonorTable = (props) => {
-  let { visible, onCancel, player_id, teamList } = props
+  let { visible, onCancel, player_id, teamList, awardData } = props
   const [tableData, setTableData] = useState([])
-  const [awardData, setAwardData] = useState([])
 
   const {
     multipleSelectionHandler,
@@ -40,17 +38,10 @@ const HonorTable = (props) => {
       setTableData(res.data.records)
     })
   }, [player_id])
-  // 获取奖项列表
-  const awardList = () => {
-    getAward().then((res) => {
-      setAwardData(res.data.records)
-    })
-  }
 
   useEffect(() => {
     if (visible) {
       getPlayerList()
-      awardList()
     }
   }, [getPlayerList, visible])
 

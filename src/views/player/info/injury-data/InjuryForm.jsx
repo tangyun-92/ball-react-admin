@@ -2,7 +2,7 @@
  * @Author: 唐云
  * @Date: 2021-09-22 11:30:28
  * @Last Modified by: 唐云
- * @Last Modified time: 2021-09-23 16:14:43
+ * @Last Modified time: 2021-09-23 16:18:18
  * 转会记录 - 新增/编辑
  */
 import React, { memo, useEffect } from 'react'
@@ -76,7 +76,7 @@ const InjuryForm = (props) => {
           <Col span={12}>
             <Form.Item
               label="球队:"
-              name="team_id"
+              name="injuryTeamId"
               rules={[{ required: true, message: '请选择!' }]}
               initialValue={team_id}
             >

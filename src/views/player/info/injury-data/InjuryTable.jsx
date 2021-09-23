@@ -2,7 +2,7 @@
  * @Author: 唐云
  * @Date: 2021-09-22 11:29:56
  * @Last Modified by: 唐云
- * @Last Modified time: 2021-09-23 16:14:20
+ * @Last Modified time: 2021-09-23 16:18:30
  * 转会记录
  */
 import React, { memo, useCallback, useEffect, useState } from 'react'
@@ -55,6 +55,7 @@ const InjuryTable = (props) => {
           ? values.start_time.format('YYYY.MM.DD')
           : '',
         end_time: values.end_time ? values.end_time.format('YYYY.MM.DD') : '',
+        team_id: values.injuryTeamId,
         player_id: player_id,
         id,
       })

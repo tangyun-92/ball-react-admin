@@ -2,7 +2,7 @@
  * @Author: 唐云
  * @Date: 2021-08-26 14:32:55
  * @Last Modified by: 唐云
- * @Last Modified time: 2021-09-23 15:55:13
+ * @Last Modified time: 2021-09-23 16:22:14
  * 球员信息
  */
 import React, { useState, useEffect, memo } from 'react'
@@ -33,12 +33,14 @@ import HistoryTable from './history-data/HistoryTable'
 import HonorTable from './honor-data/HonorTable'
 import TransferTable from './transfer-data/TransferTable'
 import InjuryTable from './injury-data/InjuryTable'
+import { getAward } from '@/api/system/award'
 
 const { Column } = Table
 
 const PlayerInfo = () => {
   const [teamList, setTeamList] = useState([]) // 球队列表
   const [nationList, setNationList] = useState([]) // 国家列表
+  const [awardData, setAwardData] = useState([]) // 奖项列表
   const [playerId, setPlayerId] = useState(null) // 球员id
 
   const { tableLoading, currentPage, total, tableData } = useSelector(
@@ -59,6 +61,8 @@ const PlayerInfo = () => {
     getTeamList()
     // 获取国家列表
     getNationList()
+    // 获取奖项列表
+    getAwardList()
   }, [dispatch])
 
   const {
@@ -85,6 +89,13 @@ const PlayerInfo = () => {
       setNationList(res.data.records)
     })
   }
+  // 获取奖项列表
+  const getAwardList = () => {
+    getAward().then((res) => {
+      setAwardData(res.data.records)
+    })
+  }
+
   // 新增/编辑提交
   const handleOk = (form) => {
     form.validateFields().then((values) => {
@@ -500,6 +511,7 @@ const PlayerInfo = () => {
       />
       <HonorTable
         teamList={teamList}
+        awardData={awardData}
         visible={honorVisible}
         onCancel={(e) => setHonorVisible(false)}
         player_id={playerId}
