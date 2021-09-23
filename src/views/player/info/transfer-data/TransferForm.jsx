@@ -2,16 +2,17 @@
  * @Author: 唐云
  * @Date: 2021-09-22 11:30:28
  * @Last Modified by: 唐云
- * @Last Modified time: 2021-09-23 13:16:47
- * 荣誉记录 - 新增/编辑
+ * @Last Modified time: 2021-09-23 15:08:39
+ * 转会记录 - 新增/编辑
  */
 import React, { memo, useEffect } from 'react'
 import { Col, Form, Input, Modal, Row, Select } from 'antd'
 import { whether } from '@/config/constants'
+import { filterDict } from '@/utils'
 
-const HonorForm = (props) => {
-  const { visible, onCancel, onOk, formData, teamList, awardData } = props
-  let { time, team_id, if_personal, award_code } = formData
+const TransferForm = (props) => {
+  const { visible, onCancel, onOk, formData, teamList } = props
+  let { time, old_team_id, new_team_id, price, transfer_type } = formData
   const [form] = Form.useForm()
   const formItemLayout = {
     labelCol: {
@@ -50,10 +51,9 @@ const HonorForm = (props) => {
           </Col>
           <Col span={12}>
             <Form.Item
-              label="球队:"
-              name="honorTeamId"
-              rules={[{ required: true, message: '请选择!' }]}
-              initialValue={team_id}
+              label="转出球队:"
+              name="old_team_id"
+              initialValue={old_team_id}
             >
               <Select
                 showSearch
@@ -72,19 +72,19 @@ const HonorForm = (props) => {
         <Row>
           <Col span={12}>
             <Form.Item
-              label="是否个人奖项:"
-              name="if_personal"
+              label="转入球队:"
+              name="new_team_id"
               rules={[{ required: true, message: '请选择!' }]}
-              initialValue={if_personal}
+              initialValue={new_team_id}
             >
               <Select
                 showSearch
                 optionFilterProp="children"
                 placeholder="请选择"
               >
-                {whether.map((val) => (
-                  <Select.Option value={val.val} key={val.val}>
-                    {val.label}
+                {teamList.map((val) => (
+                  <Select.Option value={val.id} key={val.id}>
+                    {val.name}
                   </Select.Option>
                 ))}
               </Select>
@@ -92,18 +92,29 @@ const HonorForm = (props) => {
           </Col>
           <Col span={12}>
             <Form.Item
-              label="奖项名称:"
-              name="award_code"
+              label="价格:"
+              name="price"
+              initialValue={price}
+            >
+              <Input placeholder="请输入" />
+            </Form.Item>
+          </Col>
+        </Row>
+        <Row>
+          <Col span={12}>
+            <Form.Item
+              label="转会类型:"
+              name="transfer_type"
               rules={[{ required: true, message: '请选择!' }]}
-              initialValue={award_code}
+              initialValue={transfer_type}
             >
               <Select
                 showSearch
                 optionFilterProp="children"
                 placeholder="请选择"
               >
-                {awardData.map((val) => (
-                  <Select.Option value={val.code} key={val.id}>
+                {filterDict('zhlx') && filterDict('zhlx').map((val) => (
+                  <Select.Option value={val.code} key={val.code}>
                     {val.name}
                   </Select.Option>
                 ))}
@@ -116,4 +127,4 @@ const HonorForm = (props) => {
   )
 }
 
-export default memo(HonorForm)
+export default memo(TransferForm)

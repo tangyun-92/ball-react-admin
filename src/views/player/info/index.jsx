@@ -2,7 +2,7 @@
  * @Author: 唐云
  * @Date: 2021-08-26 14:32:55
  * @Last Modified by: 唐云
- * @Last Modified time: 2021-09-22 17:07:10
+ * @Last Modified time: 2021-09-23 13:17:58
  * 球员信息
  */
 import React, { useState, useEffect, memo } from 'react'
@@ -31,6 +31,7 @@ import AbilityForm from './components/AbilityForm'
 import PositionForm from './components/PositionForm'
 import HistoryTable from './history-data/HistoryTable'
 import HonorTable from './honor-data/HonorTable'
+import TransferTable from './transfer-data/TransferTable'
 
 const { Column } = Table
 
@@ -272,6 +273,16 @@ const PlayerInfo = () => {
     setPlayerId(row.id)
   }
 
+  /**
+   * 转会记录
+   */
+  const [transferVisible, setTransferVisible] = useState(false)
+  // 显示弹窗
+  const handleEditTransfer = (row) => {
+    setTransferVisible(true)
+    setPlayerId(row.id)
+  }
+
   return (
     <div className="container player-info">
       <div className="search-container">
@@ -430,6 +441,9 @@ const PlayerInfo = () => {
               <Button type="link" onClick={(e) => handleEditHonor(row)}>
                 荣誉记录
               </Button>
+              <Button type="link" onClick={(e) => handleEditTransfer(row)}>
+                转会记录
+              </Button>
             </span>
           )}
         />
@@ -475,6 +489,12 @@ const PlayerInfo = () => {
         teamList={teamList}
         visible={honorVisible}
         onCancel={(e) => setHonorVisible(false)}
+        player_id={playerId}
+      />
+      <TransferTable
+        teamList={teamList}
+        visible={transferVisible}
+        onCancel={(e) => setTransferVisible(false)}
         player_id={playerId}
       />
     </div>

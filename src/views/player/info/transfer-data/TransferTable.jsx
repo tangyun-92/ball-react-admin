@@ -2,27 +2,25 @@
  * @Author: 唐云
  * @Date: 2021-09-22 11:29:56
  * @Last Modified by: 唐云
- * @Last Modified time: 2021-09-23 13:16:55
- * 荣誉记录
+ * @Last Modified time: 2021-09-23 15:03:44
+ * 转会记录
  */
 import React, { memo, useCallback, useEffect, useState } from 'react'
 import { Modal, Button, Table, message } from 'antd'
 import useSystemDataHooks from '@/hooks/useSystemDataHooks'
 import {
-  deletePlayerHonor,
-  getPlayerHonor,
-  updatePlayerHonor,
+  deletePlayerTransfer,
+  getPlayerTransfer,
+  updatePlayerTransfer,
 } from '@/api/player/info'
-import HonorForm from './HonorForm'
-import { getAward } from '@/api/system/award'
-import { filterWhether } from '@/utils'
+import TransferForm from './TransferForm'
+import { filterDictData } from '@/utils'
 
 const { Column } = Table
 
-const HonorTable = (props) => {
+const TransferTable = (props) => {
   let { visible, onCancel, player_id, teamList } = props
   const [tableData, setTableData] = useState([])
-  const [awardData, setAwardData] = useState([])
 
   const {
     multipleSelectionHandler,
@@ -31,43 +29,26 @@ const HonorTable = (props) => {
     dataHooks,
     handleCancel,
   } = useSystemDataHooks({
-    getListApi: getPlayerHonor,
+    getListApi: getPlayerTransfer,
   })
 
   // 获取指定球员荣誉记录列表
   const getPlayerList = useCallback(() => {
-    getPlayerHonor({ id: player_id }).then((res) => {
+    getPlayerTransfer({ id: player_id }).then((res) => {
       setTableData(res.data.records)
     })
   }, [player_id])
-  // 获取奖项列表
-  const awardList = () => {
-    getAward().then((res) => {
-      setAwardData(res.data.records)
-    })
-  }
 
   useEffect(() => {
     if (visible) {
       getPlayerList()
-      awardList()
     }
   }, [getPlayerList, visible])
-
-  // 过滤奖项名称
-  const filterAwardName = (name) => {
-    let result = null
-    if (awardData.length !== 0) {
-      result = awardData.find((item) => item.code === name)
-      return result.name
-    }
-    return ''
-  }
 
   const handleOk = (form) => {
     form.validateFields().then((values) => {
       const id = dataHooks.formData.id
-      updatePlayerHonor({
+      updatePlayerTransfer({
         ...values,
         time: values.honorTime,
         team_id: values.honorTeamId,
@@ -110,23 +91,26 @@ const HonorTable = (props) => {
         pagination={false}
       >
         <Column title="时间" dataIndex="time" key="time" align="center" />
-        <Column title="球队" dataIndex="team" key="team" align="center" />
         <Column
-          title="是否个人奖项"
-          dataIndex="if_personal"
-          key="if_personal"
+          title="转出球队"
+          dataIndex="old_team"
+          key="old_team"
           align="center"
-          render={(val) => {
-            return <span>{filterWhether(val)}</span>
-          }}
         />
         <Column
-          title="奖项名称"
-          dataIndex="award_code"
-          key="award_code"
+          title="转入球队"
+          dataIndex="new_team"
+          key="new_team"
           align="center"
-          render={(name) => {
-            return <span>{filterAwardName(name)}</span>
+        />
+        <Column title="价格" dataIndex="price" key="price" align="center" />
+        <Column
+          title="转会类型"
+          dataIndex="transfer_type"
+          key="transfer_type"
+          align="center"
+          render={(val) => {
+            return <span>{filterDictData('zhlx', val)}</span>
           }}
         />
         <Column
@@ -145,7 +129,7 @@ const HonorTable = (props) => {
                 onClick={(e) =>
                   multipleSelectionHandler({
                     operation: '删除',
-                    reqFn: deletePlayerHonor,
+                    reqFn: deletePlayerTransfer,
                     data: {
                       id: String(row.id).split(' '),
                     },
@@ -160,11 +144,10 @@ const HonorTable = (props) => {
           )}
         />
       </Table>
-      <HonorForm
+      <TransferForm
         formData={dataHooks.formData}
         visible={dataHooks.formDialogVisible}
         teamList={teamList}
-        awardData={awardData}
         onCancel={handleCancel}
         onOk={handleOk}
       />
@@ -172,4 +155,4 @@ const HonorTable = (props) => {
   )
 }
 
-export default memo(HonorTable)
+export default memo(TransferTable)

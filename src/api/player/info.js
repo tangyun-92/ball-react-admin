@@ -2,7 +2,7 @@
  * @Author: 唐云
  * @Date: 2021-08-23 13:29:23
  * @Last Modified by: 唐云
- * @Last Modified time: 2021-09-22 16:13:33
+ * @Last Modified time: 2021-09-23 13:14:00
  * 球员信息
  */
 import request from '@/utils/request'
@@ -180,6 +180,43 @@ export function updatePlayerHonor(data) {
 export function deletePlayerHonor(data) {
   return request({
     url: '/players/deletePlayerHonor',
+    method: 'post',
+    data,
+  })
+}
+
+/**
+ * 获取球员转会记录
+ * @param {*} data
+ * @returns
+ */
+export function getPlayerTransfer(data) {
+  return request({
+    url: '/players/findPlayerTransfer',
+    method: 'post',
+    data
+  })
+}
+/**
+ * 更新球员转会记录
+ * @param {*} data
+ * @returns
+ */
+export function updatePlayerTransfer(data) {
+  return request({
+    url: '/players/updatePlayerTransfer',
+    method: 'post',
+    data,
+  })
+}
+/**
+ * 删除球员转会记录
+ * @param {*} data
+ * @returns
+ */
+export function deletePlayerTransfer(data) {
+  return request({
+    url: '/players/deletePlayerTransfer',
     method: 'post',
     data,
   })
