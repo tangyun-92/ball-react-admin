@@ -2,7 +2,7 @@
  * @Author: 唐云
  * @Date: 2021-09-22 11:29:56
  * @Last Modified by: 唐云
- * @Last Modified time: 2021-09-23 16:18:30
+ * @Last Modified time: 2021-09-23 16:51:31
  * 转会记录
  */
 import React, { memo, useCallback, useEffect, useState } from 'react'
@@ -12,7 +12,7 @@ import {
   deletePlayerInjury,
   getPlayerInjury,
   updatePlayerInjury,
-} from '@/api/player/info'
+} from '@/api/data-management/player'
 import InjuryForm from './InjuryForm'
 import { filterDictData } from '@/utils'
 

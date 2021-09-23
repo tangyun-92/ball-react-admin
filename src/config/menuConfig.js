@@ -24,14 +24,14 @@ const menuList = [
     ],
   },
   {
-    title: '球员',
-    path: '/player',
+    title: '数据管理',
+    path: '/data-management',
     icon: 'home',
     roles: ['admin', 'editor', 'guest'],
     children: [
       {
-        title: '球员信息',
-        path: '/player/info',
+        title: '球员管理',
+        path: '/data-management/player',
         icon: 'home',
         roles: ['admin', 'editor', 'guest'],
       },

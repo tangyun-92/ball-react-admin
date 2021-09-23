@@ -29,7 +29,7 @@ export default [
     roles: ['admin', 'editor', 'guest'],
   },
   {
-    path: '/player/info',
+    path: '/data-management/player',
     component: PlayerInfo,
     roles: ['admin', 'editor', 'guest'],
   },

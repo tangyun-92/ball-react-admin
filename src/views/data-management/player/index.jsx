@@ -2,7 +2,7 @@
  * @Author: 唐云
  * @Date: 2021-08-26 14:32:55
  * @Last Modified by: 唐云
- * @Last Modified time: 2021-09-23 16:26:40
+ * @Last Modified time: 2021-09-23 16:54:09
  * 球员信息
  */
 import React, { useState, useEffect, memo } from 'react'
@@ -18,7 +18,7 @@ import {
   updatePlayerAbility,
   getPlayerPosition,
   updatePlayerPosition,
-} from '@/api/player/info'
+} from '@/api/data-management/player'
 import { getTeam, getNation } from '@/api/public'
 import { filterDictData } from '@/utils'
 import { useDispatch, useSelector, shallowEqual } from 'react-redux'
@@ -321,7 +321,7 @@ const PlayerInfo = () => {
         dataSource={tableData}
         loading={tableLoading}
         pagination={false}
-        scroll={{ x: 2000 }}
+        scroll={{ x: 2200 }}
       >
         <Column title="姓名" dataIndex="name" key="name" align="center" />
         <Column

@@ -2,7 +2,7 @@
  * @Author: 唐云
  * @Date: 2021-09-22 11:29:56
  * @Last Modified by: 唐云
- * @Last Modified time: 2021-09-23 16:41:15
+ * @Last Modified time: 2021-09-23 16:51:30
  * 转会记录
  */
 import React, { memo, useCallback, useEffect, useState } from 'react'
@@ -12,7 +12,7 @@ import {
   deletePlayerTransfer,
   getPlayerTransfer,
   updatePlayerTransfer,
-} from '@/api/player/info'
+} from '@/api/data-management/player'
 import TransferForm from './TransferForm'
 import { filterDictData } from '@/utils'
 

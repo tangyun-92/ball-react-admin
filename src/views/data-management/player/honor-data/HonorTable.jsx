@@ -2,7 +2,7 @@
  * @Author: 唐云
  * @Date: 2021-09-22 11:29:56
  * @Last Modified by: 唐云
- * @Last Modified time: 2021-09-23 16:22:22
+ * @Last Modified time: 2021-09-23 16:51:29
  * 荣誉记录
  */
 import React, { memo, useCallback, useEffect, useState } from 'react'
@@ -12,7 +12,7 @@ import {
   deletePlayerHonor,
   getPlayerHonor,
   updatePlayerHonor,
-} from '@/api/player/info'
+} from '@/api/data-management/player'
 import HonorForm from './HonorForm'
 import { filterWhether } from '@/utils'
 
