@@ -2,7 +2,7 @@
  * @Author: 唐云
  * @Date: 2021-09-22 11:30:28
  * @Last Modified by: 唐云
- * @Last Modified time: 2021-09-22 15:58:56
+ * @Last Modified time: 2021-09-23 15:35:56
  * 历史数据 - 新增/编辑
  */
 import React, { memo, useEffect } from 'react'
@@ -61,7 +61,7 @@ const HistoryForm = (props) => {
       <Form {...formItemLayout} form={form}>
         <Row>
           <Col span={6}>
-            <Form.Item label="时间:" name="time" initialValue={time}>
+            <Form.Item label="时间:" name="historyTime" initialValue={time}>
               <Input placeholder="请输入" />
             </Form.Item>
           </Col>

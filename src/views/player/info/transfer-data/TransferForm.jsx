@@ -2,13 +2,13 @@
  * @Author: 唐云
  * @Date: 2021-09-22 11:30:28
  * @Last Modified by: 唐云
- * @Last Modified time: 2021-09-23 15:08:39
+ * @Last Modified time: 2021-09-23 15:36:46
  * 转会记录 - 新增/编辑
  */
 import React, { memo, useEffect } from 'react'
-import { Col, Form, Input, Modal, Row, Select } from 'antd'
-import { whether } from '@/config/constants'
+import { Col, DatePicker, Form, Input, Modal, Row, Select } from 'antd'
 import { filterDict } from '@/utils'
+import moment from 'moment'
 
 const TransferForm = (props) => {
   const { visible, onCancel, onOk, formData, teamList } = props
@@ -24,6 +24,9 @@ const TransferForm = (props) => {
   }
 
   useEffect(() => {
+    if (formData.time) {
+      formData.time = moment(formData.time, 'YYYY.MM')
+    }
     form.resetFields()
     form.setFieldsValue(formData)
   }, [form, formData])
@@ -42,11 +45,11 @@ const TransferForm = (props) => {
           <Col span={12}>
             <Form.Item
               label="时间:"
-              name="honorTime"
+              name="time"
               rules={[{ required: true, message: '请输入!' }]}
               initialValue={time}
             >
-              <Input placeholder="请输入" />
+              <DatePicker placeholder="请选择" picker="month" format="YYYY.MM" />
             </Form.Item>
           </Col>
           <Col span={12}>
@@ -91,11 +94,7 @@ const TransferForm = (props) => {
             </Form.Item>
           </Col>
           <Col span={12}>
-            <Form.Item
-              label="价格:"
-              name="price"
-              initialValue={price}
-            >
+            <Form.Item label="价格:" name="transferPrice" initialValue={price}>
               <Input placeholder="请输入" />
             </Form.Item>
           </Col>
@@ -113,11 +112,12 @@ const TransferForm = (props) => {
                 optionFilterProp="children"
                 placeholder="请选择"
               >
-                {filterDict('zhlx') && filterDict('zhlx').map((val) => (
-                  <Select.Option value={val.code} key={val.code}>
-                    {val.name}
-                  </Select.Option>
-                ))}
+                {filterDict('zhlx') &&
+                  filterDict('zhlx').map((val) => (
+                    <Select.Option value={val.code} key={val.code}>
+                      {val.name}
+                    </Select.Option>
+                  ))}
               </Select>
             </Form.Item>
           </Col>

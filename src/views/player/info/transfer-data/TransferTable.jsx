@@ -2,7 +2,7 @@
  * @Author: 唐云
  * @Date: 2021-09-22 11:29:56
  * @Last Modified by: 唐云
- * @Last Modified time: 2021-09-23 15:03:44
+ * @Last Modified time: 2021-09-23 15:37:12
  * 转会记录
  */
 import React, { memo, useCallback, useEffect, useState } from 'react'
@@ -50,8 +50,8 @@ const TransferTable = (props) => {
       const id = dataHooks.formData.id
       updatePlayerTransfer({
         ...values,
-        time: values.honorTime,
-        team_id: values.honorTeamId,
+        time: values.time ? values.time.format('YYYY.MM') : '',
+        price: values.transferPrice,
         player_id: player_id,
         id,
       })

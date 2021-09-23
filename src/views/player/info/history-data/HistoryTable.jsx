@@ -2,7 +2,7 @@
  * @Author: 唐云
  * @Date: 2021-09-22 11:29:56
  * @Last Modified by: 唐云
- * @Last Modified time: 2021-09-22 16:15:51
+ * @Last Modified time: 2021-09-23 15:36:08
  * 历史数据
  */
 import React, { memo, useCallback, useEffect, useState } from 'react'
@@ -50,6 +50,7 @@ const HistoryTable = (props) => {
       updatePlayerData({
         ...values,
         shoot: values.dataShoot,
+        time: values.historyTime,
         player_id: player_id,
         id,
       })
