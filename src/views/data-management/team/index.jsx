@@ -2,7 +2,7 @@
  * @Author: 唐云
  * @Date: 2021-09-24 09:25:04
  * @Last Modified by: 唐云
- * @Last Modified time: 2021-09-24 16:56:07
+ * @Last Modified time: 2021-09-24 16:59:23
  * 球队管理
  */
 import React, { memo, useEffect, useState } from 'react'
@@ -57,7 +57,7 @@ const TeamManagement = () => {
   const handleOk = (form) => {
     form.validateFields().then((values) => {
       let team_logo = ''
-      if (typeof values.team_logo === 'object') {
+      if (typeof values.team_logo === 'object' && values.team_logo !== null) {
         team_logo = values.team_logo[0].response.url
       } else {
         team_logo = values.team_logo
