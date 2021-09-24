@@ -2,10 +2,10 @@
  * @Author: 唐云
  * @Date: 2021-09-24 09:25:04
  * @Last Modified by: 唐云
- * @Last Modified time: 2021-09-24 10:40:15
+ * @Last Modified time: 2021-09-24 11:09:44
  * 球队管理
  */
-import React, { memo, useEffect } from 'react'
+import React, { memo, useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import {
   changeSearchDataAction,
@@ -18,10 +18,13 @@ import { useSelector } from 'react-redux'
 import { shallowEqual } from 'react-redux'
 import { createOrEditTeam, delTeam, getTeam } from '@/api/data-management/team'
 import EditForm from './components/EditForm'
+import HistoryTable from './history-data/HistoryTable'
 
 const { Column } = Table
 
 const TeamManagement = () => {
+  const [teamId, setTeamId] = useState(null) // 球队id
+
   const { tableLoading, currentPage, total, tableData } = useSelector(
     (state) => ({
       tableLoading: state.common.tableLoading,
@@ -79,6 +82,16 @@ const TeamManagement = () => {
           console.log(e)
         })
     })
+  }
+
+  /**
+   * 历史数据
+   */
+  const [historyVisible, setHistoryVisible] = useState(false)
+  // 显示弹窗
+  const handleEditHistory = (row) => {
+    setHistoryVisible(true)
+    setTeamId(row.id)
   }
 
   /**
@@ -191,6 +204,9 @@ const TeamManagement = () => {
               >
                 删除
               </Button>
+              <Button type="link" onClick={(e) => handleEditHistory(row)}>
+                历史数据
+              </Button>
             </span>
           )}
         />
@@ -211,6 +227,11 @@ const TeamManagement = () => {
         visible={dataHooks.formDialogVisible}
         onCancel={handleCancel}
         onOk={handleOk}
+      />
+      <HistoryTable
+        visible={historyVisible}
+        onCancel={(e) => setHistoryVisible(false)}
+        team_id={teamId}
       />
     </div>
   )

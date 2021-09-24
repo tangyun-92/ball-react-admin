@@ -2,7 +2,7 @@
  * @Author: 唐云
  * @Date: 2021-08-23 13:29:23
  * @Last Modified by: 唐云
- * @Last Modified time: 2021-09-24 10:08:20
+ * @Last Modified time: 2021-09-24 10:55:56
  * 球队管理
  */
 import request from '@/utils/request'
@@ -54,6 +54,43 @@ export function uploadImage(data) {
 export function delTeam(data) {
   return request({
     url: '/teams/delete',
+    method: 'post',
+    data
+  })
+}
+
+/**
+ * 获取球队历史数据
+ * @param {*} data
+ * @returns
+ */
+export function getTeamData(data) {
+  return request({
+    url: '/teams/findTeamData',
+    method: 'post',
+    data
+  })
+}
+/**
+ * 更新球队历史数据
+ * @param {*} data
+ * @returns
+ */
+export function updateTeamData(data) {
+  return request({
+    url: '/teams/updateTeamData',
+    method: 'post',
+    data
+  })
+}
+/**
+ * 删除球队历史数据
+ * @param {*} data
+ * @returns
+ */
+export function deleteTeamData(data) {
+  return request({
+    url: '/teams/deleteTeamData',
     method: 'post',
     data
   })
