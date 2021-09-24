@@ -35,6 +35,12 @@ const menuList = [
         icon: 'home',
         roles: ['admin', 'editor', 'guest'],
       },
+      {
+        title: '球队管理',
+        path: '/data-management/team',
+        icon: 'home',
+        roles: ['admin', 'editor', 'guest'],
+      },
     ],
   },
   // {

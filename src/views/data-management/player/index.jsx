@@ -2,8 +2,8 @@
  * @Author: 唐云
  * @Date: 2021-08-26 14:32:55
  * @Last Modified by: 唐云
- * @Last Modified time: 2021-09-23 16:54:09
- * 球员信息
+ * @Last Modified time: 2021-09-24 09:42:36
+ * 球员管理
  */
 import React, { useState, useEffect, memo } from 'react'
 import { Table, Button, Pagination, message, Rate } from 'antd'
@@ -307,7 +307,11 @@ const PlayerInfo = () => {
   return (
     <div className="container player-info">
       <div className="search-container">
-        <SearchForm onFinish={onSearchFinish} />
+        <SearchForm
+          onFinish={onSearchFinish}
+          teamList={teamList}
+          nationList={nationList}
+        />
       </div>
       <div className="opera-container">
         <Button type="primary" onClick={(e) => handleCreate('dictType')}>

@@ -12,6 +12,10 @@ const PlayerInfo = Loadable({
   loader: () => import('@/views/data-management/player'),
   loading: Loading,
 })
+const TeamManagement = Loadable({
+  loader: () => import('@/views/data-management/team'),
+  loading: Loading,
+})
 const Error404 = Loadable({
   loader: () => import('@/views/error/404'),
   loading: Loading,
@@ -31,6 +35,11 @@ export default [
   {
     path: '/data-management/player',
     component: PlayerInfo,
+    roles: ['admin', 'editor', 'guest'],
+  },
+  {
+    path: '/data-management/team',
+    component: TeamManagement,
     roles: ['admin', 'editor', 'guest'],
   },
   { path: '/error/404', component: Error404 },
