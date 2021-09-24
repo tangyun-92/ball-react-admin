@@ -103,7 +103,15 @@ const TransferTable = (props) => {
           key="new_team"
           align="center"
         />
-        <Column title="价格" dataIndex="price" key="price" align="center" />
+        <Column
+          title="价格"
+          dataIndex="price"
+          key="price"
+          align="center"
+          render={(price) => {
+            return <span>{price ? `${price}万欧` : ''}</span>
+          }}
+        />
         <Column
           title="转会类型"
           dataIndex="transfer_type"

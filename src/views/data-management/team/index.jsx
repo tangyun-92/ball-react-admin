@@ -2,7 +2,7 @@
  * @Author: 唐云
  * @Date: 2021-09-24 09:25:04
  * @Last Modified by: 唐云
- * @Last Modified time: 2021-09-24 11:09:44
+ * @Last Modified time: 2021-09-24 16:56:07
  * 球队管理
  */
 import React, { memo, useEffect, useState } from 'react'
@@ -216,8 +216,8 @@ const TeamManagement = () => {
         pageSizeOptions={['10', '20', '50', '100']}
         showTotal={(total) => `共${total}条数据`}
         onChange={handleSizeChange}
-        current={currentPage}
         onShowSizeChange={handleCurrentChange}
+        defaultCurrent={currentPage}
         showSizeChanger
         showQuickJumper
         hideOnSinglePage={false}

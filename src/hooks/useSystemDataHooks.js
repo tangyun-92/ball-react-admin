@@ -32,8 +32,9 @@ export default function ({ getListApi, searchData }) {
    * 切换每页显示条数
    * @param {*} pageSize
    */
-  const handleSizeChange = (pageSize) => {
-    dispatch(changePageSizeAction(pageSize))
+  const handleSizeChange = (pageSize, currentPage) => {
+    dispatch(changeCurrentPageAction(pageSize))
+    dispatch(changePageSizeAction(currentPage))
     dispatch(getTableListAction(getListApi))
   }
 

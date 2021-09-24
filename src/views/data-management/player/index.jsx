@@ -2,7 +2,7 @@
  * @Author: 唐云
  * @Date: 2021-08-26 14:32:55
  * @Last Modified by: 唐云
- * @Last Modified time: 2021-09-24 09:42:36
+ * @Last Modified time: 2021-09-24 16:56:19
  * 球员管理
  */
 import React, { useState, useEffect, memo } from 'react'
@@ -100,7 +100,8 @@ const PlayerInfo = () => {
   const handleOk = (form) => {
     form.validateFields().then((values) => {
       let avatar = ''
-      if (typeof values.avatar === 'object') {
+      console.log(values.avatar)
+      if (typeof values.avatar === 'object' && values.avatar !== null) {
         avatar = values.avatar[0].response.url
       } else {
         avatar = values.avatar
@@ -481,8 +482,8 @@ const PlayerInfo = () => {
         pageSizeOptions={['10', '20', '50', '100']}
         showTotal={(total) => `共${total}条数据`}
         onChange={handleSizeChange}
-        current={currentPage}
         onShowSizeChange={handleCurrentChange}
+        defaultCurrent={currentPage}
         showSizeChanger
         showQuickJumper
         hideOnSinglePage={false}
